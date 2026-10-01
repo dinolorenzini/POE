@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POE — Circuits Practice</title>
-<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"],["$","$"]]},svg:{fontCache:"global"}};</script>
+<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["\\[","\\]"],["$","$"]]},svg:{fontCache:"global"}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -287,7 +287,7 @@ body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!import
 
         function triggerMathJax() {
             if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise([document.getElementById("promptText"),document.getElementById("formulaBar"),document.getElementById("hintBox")]).catch(()=>{});
+                window.MathJax.typesetPromise([document.getElementById("promptText"),document.getElementById("formulaBar"),document.getElementById("hintBox"),document.getElementById("learnContent")]).catch(()=>{});
             }
         }
 
