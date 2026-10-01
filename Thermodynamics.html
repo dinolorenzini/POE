@@ -75,7 +75,14 @@ $("#reportBtn").onclick=()=>{$("#report").classList.add("open");renderReport()};
 $("#closeReport").onclick=()=>$("#report").classList.remove("open");
 $("#calcBtn").onclick=()=>{window.open("https://www.desmos.com/scientific","_blank","noopener")};
 $("#themeBtn").onclick=()=>{const theme=document.documentElement.classList.toggle("dark")?"dark":"light";localStorage.setItem("poeTheme",theme);engine.contentWindow?.postMessage({type:"poe-theme",theme},"*");icon()};
-document.querySelectorAll(".mode-tab").forEach(b=>b.onclick=()=>load(b.dataset.mode));
+document.querySelectorAll(".mode-tab").forEach(b=>b.onclick=()=>load(b.dataset.mode));window.addEventListener("message",function(e){
+  if(e.data?.type!=="poe-attempt")return;
+  state.attempted++;
+  if(e.data.correct)state.correct++;
+  state.items.push({topic:e.data.topic||"Thermodynamics",answer:e.data.answer||"—",status:e.data.correct?"Correct":"Incorrect",target:e.data.target,unit:e.data.unit,attempts:e.data.attempts||0});
+  renderReport();
+});
+
 (function(){const t=localStorage.getItem("poeTheme")||"light";document.documentElement.classList.toggle("dark",t==="dark");load(state.mode);icon()})();
 </script>
 </body></html>
