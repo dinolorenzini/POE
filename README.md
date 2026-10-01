@@ -19,8 +19,7 @@ Main experiences:
 
 ### Thermodynamics
 1. Open `Thermodynamics.html`.
-2. Use **Infinite practice** for randomized practice across the Thermodynamics problem engines.
-3. Use **Core** or **Part 2** when you want to focus on one question set.
+2. Use **Infinite practice** for randomized practice across both preserved Thermodynamics engines. The source engine is selected internally; Part 2 is not exposed as a separate user-facing mode.
 4. Submit an answer in the embedded practice engine.
 5. Incorrect answers reveal the existing formula/hint/worked-example guidance.
 6. Use **Report** to review the current session, including submitted and expected answers.
