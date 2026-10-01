@@ -63,6 +63,16 @@ body .text-blue-600,body .text-blue-700,body .dark\:text-blue-400,body .dark\:te
 body .bg-blue-50,body .bg-amber-50{background:var(--c-panel)!important}
 body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!important}
 @media(max-width:900px){body>div.min-h-screen>main>div.grid{grid-template-columns:1fr!important}}
+</style><style id="poe-dark-mode-final">
+/* Dark mode final normalization: override fixed light-theme legacy declarations. */
+html.dark .container,html.dark .card,html.dark .panel,html.dark .work-area{background:var(--c-surface)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
+html.dark .prompt-text,html.dark .hint-box,html.dark .feedback,html.dark .example-text,html.dark .worked-example{background:var(--c-panel)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
+html.dark .formula-bar{background:#090909!important;color:#f1f1f1!important;border-color:#333!important}
+html.dark input,html.dark select,html.dark textarea{background:var(--c-bg)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
+html.dark svg text{fill:var(--c-text)!important}
+html.dark svg rect,html.dark svg polygon{stroke:var(--c-border)!important}
+html.dark .correct{background:#132019!important;color:#9bd0aa!important;border-color:#31533c!important}
+html.dark .incorrect{background:#241616!important;color:#e5a0a0!important;border-color:#5a3333!important}
 </style></head>
 <body class="min-h-screen bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
     <div class="min-h-screen flex">
