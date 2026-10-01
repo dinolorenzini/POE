@@ -184,6 +184,39 @@ html.dark #wallGraphic{background:#111!important;border-color:#3a3a3a!important}
 html.dark #wallGraphic text{fill:#d0d0d0!important}
 html.dark #wallGraphic rect,html.dark #wallGraphic path,html.dark #wallGraphic line{stroke:#777!important}
 html.dark .wrapper>div:last-child{background:#080808!important;border-color:#292929!important}
+</style><style id="poe-final-layout">
+/* Calculator stays a tool, not the entire Thermodynamics workspace. */
+.wrapper{grid-template-columns:minmax(0,1.55fr) minmax(250px,.72fr) 340px!important;align-items:start!important}
+.wrapper>div:last-child{height:500px!important;min-height:0!important;position:sticky!important;top:10px!important;grid-column:auto!important}
+.wrapper>div:last-child iframe{width:100%!important;height:100%!important;min-height:0!important}
+@media(max-width:1180px){
+  .wrapper{grid-template-columns:minmax(0,1fr) 320px!important}
+  .wrapper>.work-area{grid-column:1}
+  .wrapper>.side-panel{grid-column:1}
+  .wrapper>div:last-child{grid-column:2!important;grid-row:1 / span 2!important;height:500px!important}
+}
+@media(max-width:820px){
+  .wrapper{display:flex!important;flex-direction:column!important;height:auto!important;min-height:100vh!important}
+  .wrapper>.work-area,.wrapper>.side-panel,.wrapper>div:last-child{width:100%!important;grid-column:auto!important;grid-row:auto!important}
+  .wrapper>div:last-child{position:relative!important;top:auto!important;height:500px!important}
+}
+/* Engine dark mode: legacy fixed colors are overridden with the POE palette. */
+html.dark .work-area,html.dark .side-panel{background:var(--poe-surface)!important;color:var(--poe-text)!important}
+html.dark .val-card,html.dark .ref-eq,html.dark .scene,html.dark .r-table tr:nth-child(even){background:var(--poe-surface2)!important}
+html.dark .val-data,html.dark .ref-title,html.dark .ref-eq,html.dark .prompt-text,html.dark .step,html.dark .side-panel{color:var(--poe-text)!important}
+html.dark .prompt-text{background:#171717!important;border-color:#363636!important}
+html.dark .step{background:#101010!important;border-color:#4a4a4a!important}
+html.dark .hint-box{background:#171717!important;border-color:#3d3d3d!important;color:#d0d0d0!important}
+html.dark .example-box{background:#171717!important;border-color:#3d3d3d!important;color:#d0d0d0!important}
+html.dark .val-card,html.dark .ref-eq{border-color:#363636!important}
+html.dark .val-label{color:#999!important}
+html.dark input{background:#0d0d0d!important;color:#eee!important;border-color:#4a4a4a!important}
+html.dark .lvl-btn{background:#1b1b1b!important;color:#eee!important;border-color:#3a3a3a!important}
+html.dark .lvl-btn.active{border-color:#eee!important}
+html.dark .formula-bar{background:#050505!important;color:#eee!important;border-color:#3a3a3a!important}
+html.dark .r-table th{background:#252525!important;color:#eee!important}
+html.dark .r-table td,html.dark .r-table th{border-color:#3a3a3a!important}
+html.dark svg{filter:grayscale(1)!important}
 </style></head>
 <body>
     <div class="wrapper">
