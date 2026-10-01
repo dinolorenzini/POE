@@ -20,11 +20,11 @@ Main experiences:
 ### Thermodynamics
 1. Open `Thermodynamics.html`.
 2. Use **Infinite practice** for randomized practice across both preserved Thermodynamics engines. The source engine is selected internally; Part 2 is not exposed as a separate user-facing mode.
-4. Submit an answer in the embedded practice engine.
-5. Incorrect answers reveal the existing formula/hint/worked-example guidance.
-6. Use **Report** to review the current session, including submitted and expected answers.
-7. Use **Learn Mode** for a guided problem-solving workflow.
-8. Use the embedded Desmos scientific calculator in the practice workspace; the dashboard also provides a Desmos shortcut.
+3. Submit an answer in the embedded practice engine.
+4. Incorrect answers reveal the existing formula/hint/worked-example guidance.
+5. Use **Report** to review the current session, including submitted and expected answers.
+6. Use **Learn Mode** for a guided problem-solving workflow.
+7. Use the embedded Desmos scientific calculator in the practice workspace; the dashboard also provides a Desmos shortcut.
 
 The original problem engines are intentionally kept separate internally so that their existing generators and educational content are not lost during UI work.
 
