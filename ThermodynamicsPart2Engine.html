@@ -186,19 +186,21 @@ html.dark #wallGraphic rect,html.dark #wallGraphic path,html.dark #wallGraphic l
 html.dark .wrapper>div:last-child{background:#080808!important;border-color:#292929!important}
 </style><style id="poe-final-layout">
 /* Calculator stays a tool, not the entire Thermodynamics workspace. */
+#calculatorPanel{min-width:0!important;overflow:hidden!important}
+#calculatorPanel iframe{display:block!important}
 .wrapper{grid-template-columns:minmax(0,1.55fr) minmax(250px,.72fr) 340px!important;align-items:start!important}
-.wrapper>div:last-child{height:500px!important;min-height:0!important;position:sticky!important;top:10px!important;grid-column:auto!important}
-.wrapper>div:last-child iframe{width:100%!important;height:100%!important;min-height:0!important}
+#calculatorPanel{height:500px!important;min-height:0!important;position:sticky!important;top:10px!important;grid-column:auto!important}
+#calculatorPanel iframe{width:100%!important;height:100%!important;min-height:0!important}
 @media(max-width:1180px){
   .wrapper{grid-template-columns:minmax(0,1fr) 320px!important}
   .wrapper>.work-area{grid-column:1}
   .wrapper>.side-panel{grid-column:1}
-  .wrapper>div:last-child{grid-column:2!important;grid-row:1 / span 2!important;height:500px!important}
+  #calculatorPanel{grid-column:2!important;grid-row:1 / span 2!important;height:500px!important}
 }
 @media(max-width:820px){
   .wrapper{display:flex!important;flex-direction:column!important;height:auto!important;min-height:100vh!important}
-  .wrapper>.work-area,.wrapper>.side-panel,.wrapper>div:last-child{width:100%!important;grid-column:auto!important;grid-row:auto!important}
-  .wrapper>div:last-child{position:relative!important;top:auto!important;height:500px!important}
+  .wrapper>.work-area,.wrapper>.side-panel,#calculatorPanel{width:100%!important;grid-column:auto!important;grid-row:auto!important}
+  #calculatorPanel{position:relative!important;top:auto!important;height:500px!important}
 }
 /* Engine dark mode: legacy fixed colors are overridden with the POE palette. */
 html.dark .work-area,html.dark .side-panel{background:var(--poe-surface)!important;color:var(--poe-text)!important}
@@ -383,12 +385,12 @@ html.dark svg{filter:grayscale(1)!important}
             </div>
         </div>
 
-        <div style="background:#212529; border-radius:12px; overflow:hidden;"><iframe src="https://www.desmos.com/scientific"></iframe></div>
+        <div id="calculatorPanel" class="calculator-panel" style="background:#212529; border-radius:12px; overflow:hidden;"><iframe src="https://www.desmos.com/scientific" title="Scientific calculator"></iframe></div>
     </div>
 
     <script>
         window.p = {};
-        window.score = parseInt(localStorage.getItem('score_thermo_quiz')) || 0;
+        window.score = parseInt(localStorage.getItem('score_thermo')) || 0;
         window.incorrectAttempts = 0;
         window.levelHistory = JSON.parse(localStorage.getItem('level_history_thermo_quiz')) || {};
 
@@ -731,7 +733,7 @@ html.dark svg{filter:grayscale(1)!important}
 
         function jumpToLevel(lvlIndex) {
             window.score = parseInt(lvlIndex);
-            localStorage.setItem('score_thermo_quiz', window.score);
+            localStorage.setItem('score_thermo', window.score);
             generate(false);
         }
 
@@ -739,7 +741,7 @@ html.dark svg{filter:grayscale(1)!important}
             if (window.score >= TYPE_BUILDERS.length) { 
                 window.poeNotice?.("Mastery Achieved! You have mastered all quiz concepts."); 
                 window.score = 0;
-                localStorage.setItem('score_thermo_quiz', 0);
+                localStorage.setItem('score_thermo', 0);
             }
 
             const lvlIdx = window.score % TYPE_BUILDERS.length;
@@ -806,7 +808,7 @@ html.dark svg{filter:grayscale(1)!important}
                 updateLevelButtons(currentLevel);
 
                 window.score++;
-                localStorage.setItem('score_thermo_quiz', window.score);
+                localStorage.setItem('score_thermo', window.score);
                 setTimeout(() => generate(false), 1500);
             } else {
                 window.incorrectAttempts++;
