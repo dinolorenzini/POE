@@ -54,7 +54,7 @@ function toggleTheme(){const d=!document.documentElement.classList.contains("dar
 function progress(){
  const t=parseInt(localStorage.getItem("score_thermo")||"0"),c=parseInt(localStorage.getItem("score_circuits_v11")||"0");
  $("#thermoScore").textContent=t;$("#circuitScore").textContent=c;
- $("#thermoBar").style.width=Math.min(100,(t/7)*100)+"%";$("#circuitBar").style.width=Math.min(100,(c/10)*100)+"%";
+ $("#thermoBar").style.width=Math.min(100,(t/20)*100)+"%";$("#circuitBar").style.width=Math.min(100,(c/20)*100)+"%";
 }
 function saveName(){const n=$("#nameInput").value.trim();if(!n)return toast("Enter a name first.");localStorage.setItem("studentName",n);$("#nameLabel").textContent=n;$("#accountName").textContent=n;$("#modal").classList.remove("open");toast("Name saved.")}
 $("#themeBtn").onclick=toggleTheme;$("#nameBtn").onclick=()=>{$("#nameInput").value=localStorage.getItem("studentName")||"";$("#modal").classList.add("open")};$("#closeModal").onclick=()=>$("#modal").classList.remove("open");$("#saveName").onclick=saveName;
