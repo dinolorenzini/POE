@@ -31,7 +31,37 @@
         .lvl-btn.active { box-shadow: 0 0 0 2px rgba(59,130,246,.25); }
     </style>
 <style>
-:root{--poe-bg:#d4d5d7;--poe-surface:#e4e5e7;--poe-border:#92969a;--poe-text:#17191b}html.dark{--poe-bg:#050505;--poe-surface:#111;--poe-border:#3a3a3a;--poe-text:#eee}html,body{background:var(--poe-bg)!important;color:var(--poe-text)!important}body{font-family:"DM Sans",system-ui,sans-serif!important}.container,.card,.panel,.work-area{border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.14)!important}.btn,button{border-radius:5px!important}button{font-family:"DM Sans",sans-serif!important}</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><script>(function(){const sync=()=>document.documentElement.classList.toggle("dark",localStorage.getItem("poeTheme")==="dark");sync();window.addEventListener("storage",sync);window.addEventListener("message",e=>{if(e.data?.type==="poe-theme"){localStorage.setItem("poeTheme",e.data.theme);sync()}})})();</script></head>
+:root{--poe-bg:#d4d5d7;--poe-surface:#e4e5e7;--poe-border:#92969a;--poe-text:#17191b}html.dark{--poe-bg:#050505;--poe-surface:#111;--poe-border:#3a3a3a;--poe-text:#eee}html,body{background:var(--poe-bg)!important;color:var(--poe-text)!important}body{font-family:"DM Sans",system-ui,sans-serif!important}.container,.card,.panel,.work-area{border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.14)!important}.btn,button{border-radius:5px!important}button{font-family:"DM Sans",sans-serif!important}</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><script>(function(){const sync=()=>document.documentElement.classList.toggle("dark",localStorage.getItem("poeTheme")==="dark");sync();window.addEventListener("storage",sync);window.addEventListener("message",e=>{if(e.data?.type==="poe-theme"){localStorage.setItem("poeTheme",e.data.theme);sync()}})})();</script>
+<style id="poe-ux-polish">
+:root{--c-bg:#dfe1e3;--c-surface:#f4f5f6;--c-panel:#e7e9eb;--c-border:#b6b9bc;--c-text:#17191b;--c-muted:#62676b;--c-accent:#252729}
+html.dark{--c-bg:#000;--c-surface:#0d0d0d;--c-panel:#151515;--c-border:#343434;--c-text:#f1f1f1;--c-muted:#9b9b9b;--c-accent:#e5e5e5}
+html,body{background:var(--c-bg)!important;color:var(--c-text)!important}
+body{font-family:"DM Sans",system-ui,sans-serif!important}
+body>div.min-h-screen{min-height:100vh!important;background:var(--c-bg)!important}
+body>div.min-h-screen>aside{display:none!important}
+body>div.min-h-screen>main{width:100%!important;padding:18px!important;background:var(--c-bg)!important}
+body>div.min-h-screen>main>header{max-width:1380px!important;margin:0 auto 14px!important}
+body>div.min-h-screen>main>div.grid{max-width:1380px!important;margin:0 auto!important;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr)!important;gap:14px!important}
+body>div.min-h-screen>main section,
+body>div.min-h-screen>main>div.grid>div{background:var(--c-surface)!important;border:1px solid var(--c-border)!important;border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.09)!important}
+body>div.min-h-screen>main section{padding:18px!important}
+body .rounded-3xl,body .rounded-2xl,body .rounded-xl{border-radius:6px!important}
+body .bg-white,body .dark\:bg-slate-900{background:var(--c-surface)!important}
+body .bg-slate-50,body .dark\:bg-slate-800{background:var(--c-panel)!important}
+body .border-slate-200,body .dark\:border-slate-700{border-color:var(--c-border)!important}
+body .text-slate-500,body .text-slate-600,body .dark\:text-slate-300{color:var(--c-muted)!important}
+body .text-slate-800,body .dark\:text-slate-100,body .dark\:text-slate-200{color:var(--c-text)!important}
+body .prompt-text{background:var(--c-panel)!important;border:1px solid var(--c-border)!important;color:var(--c-text)!important}
+body button{background:var(--c-panel)!important;color:var(--c-text)!important;border:1px solid var(--c-border)!important;box-shadow:none!important}
+body button.bg-gradient-to-r,body button.bg-blue-600{background:var(--c-accent)!important;color:var(--c-bg)!important}
+body input{background:var(--c-bg)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
+body .formula-bar{background:#090909!important;color:#f1f1f1!important}
+body .hint-box{background:var(--c-panel)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
+body .text-blue-600,body .text-blue-700,body .dark\:text-blue-400,body .dark\:text-blue-200{color:var(--c-text)!important}
+body .bg-blue-50,body .bg-amber-50{background:var(--c-panel)!important}
+body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!important}
+@media(max-width:900px){body>div.min-h-screen>main>div.grid{grid-template-columns:1fr!important}}
+</style></head>
 <body class="min-h-screen bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
     <div class="min-h-screen flex">
         <aside class="w-72 bg-white/90 dark:bg-slate-900/90 border-r border-slate-200 dark:border-slate-700 sticky top-0 h-screen p-6 shrink-0">
