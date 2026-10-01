@@ -78,7 +78,6 @@ function load(mode){
  state.mode=mode;
  const src=modes[mode]||modes[Math.random()<.5?"core":"part2"];
  engine.src=src;
- $("#modeLabel").textContent=mode==="infinite"?"RANDOMIZED • NO LIMIT":mode==="core"?"CORE QUESTIONS":"PART 2 QUESTIONS";
  document.querySelectorAll(".mode-tab").forEach(x=>x.classList.toggle("active",x.dataset.mode===mode));
 }
 function next(){load(state.mode==="infinite"?(Math.random()<.5?"core":"part2"):state.mode);}
@@ -90,7 +89,6 @@ function renderReport(){
 $("#learnBtn").onclick=()=>$("#learn").classList.add("open");$("#closeLearn").onclick=()=>$("#learn").classList.remove("open");$("#nextBtn").onclick=next;
 $("#reportBtn").onclick=()=>{$("#report").classList.add("open");renderReport()};
 $("#closeReport").onclick=()=>$("#report").classList.remove("open");
-$("#calcBtn").onclick=()=>{window.open("https://www.desmos.com/scientific","_blank","noopener")};
 $("#themeBtn").onclick=()=>{const theme=document.documentElement.classList.toggle("dark")?"dark":"light";localStorage.setItem("poeTheme",theme);engine.contentWindow?.postMessage({type:"poe-theme",theme},"*");icon()};
 document.querySelectorAll(".mode-tab").forEach(b=>b.onclick=()=>load(b.dataset.mode));window.addEventListener("message",function(e){
   if(e.data?.type!=="poe-attempt")return;
