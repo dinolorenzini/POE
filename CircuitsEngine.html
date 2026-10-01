@@ -276,7 +276,7 @@ body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!import
         }
 
         function loadLevel() {
-            if (window.score >= LEVEL_TEMPLATES.length) { alert('🎉 Congratulations! You completed all circuit analysis levels!'); window.score = 0; }
+            if (window.score >= LEVEL_TEMPLATES.length) { window.poeNotice?.("You completed all circuit analysis levels!"); window.score = 0; }
             window.wrongAttempts = 0;
             const template = LEVEL_TEMPLATES[window.score];
             window.activeState = Object.assign({}, template, template.generate());
@@ -356,5 +356,11 @@ body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!import
         applyTheme();
         window.onload = loadLevel;
     </script>
-</body>
+<script>
+window.poeNotice=function(message){
+  let el=document.getElementById("poe-notice");
+  if(!el){el=document.createElement("div");el.id="poe-notice";el.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;max-width:min(520px,calc(100vw - 32px));padding:11px 14px;border:1px solid var(--e-border,#777);border-radius:6px;background:var(--e-surface,#f4f4f4);color:var(--e-text,#171717);box-shadow:0 8px 24px rgba(0,0,0,.2);font:600 13px DM Sans,system-ui,sans-serif";document.body.appendChild(el)}
+  el.textContent=message;el.style.opacity="1";clearTimeout(window.__poeNoticeTimer);window.__poeNoticeTimer=setTimeout(()=>{el.style.opacity="0"},2600);
+};
+</script></body>
 </html>
