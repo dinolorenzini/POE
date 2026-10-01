@@ -12,7 +12,7 @@
 .toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.icon-btn{display:inline-flex;align-items:center;gap:7px}.icon-btn svg{width:16px;height:16px}
 .workspace{border:1px solid var(--border);background:var(--surface);min-height:calc(100vh - 150px);box-shadow:var(--shadow)}
 .workspace-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);gap:10px}
-.mode-tabs{display:flex;gap:4px}.mode-tab{border:1px solid var(--border);background:var(--surface);padding:7px 11px;border-radius:5px;color:var(--text)}.mode-tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.mode-tabs{display:flex;align-items:center;gap:4px}.practice-label{font:600 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:7px 0}.mode-tab{border:1px solid var(--border);background:var(--surface);padding:7px 11px;border-radius:5px;color:var(--text)}.mode-tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .engine{width:100%;height:calc(100vh - 205px);min-height:650px;border:0;display:block;background:var(--bg)}
 .report{position:fixed;right:20px;top:80px;width:min(560px,calc(100vw - 40px));max-height:75vh;overflow:auto;z-index:50;background:var(--surface);border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,.25);display:none}.report.open{display:block}
 .report-head{padding:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}.report-body{padding:14px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{border:1px solid var(--border);background:var(--surface-2);padding:10px}.stat b{font:700 20px "JetBrains Mono"}.attempt{border-top:1px solid var(--border);padding:10px 0}.attempt small{color:var(--muted)}
@@ -44,7 +44,6 @@
     <a class="nav-link" href="index.html"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
     <a class="nav-link active" href="Thermodynamics.html"><i data-lucide="thermometer"></i><span>Thermodynamics</span></a>
     <a class="nav-link" href="Circuits.html"><i data-lucide="cpu"></i><span>Circuits</span></a>
-    <a class="nav-link" href="Thermodynamics.html?mode=part2"><i data-lucide="layers-2"></i><span>Part 2</span></a>
   </nav>
   <div class="sidebar-footer"><button class="btn icon-btn" id="themeBtn"><i data-lucide="moon"></i><span>Theme</span></button></div>
 </aside>
@@ -56,9 +55,7 @@
 </div></header>
 <section class="workspace">
 <div class="workspace-head"><div class="mode-tabs">
-<button class="mode-tab active" data-mode="infinite">Infinite practice</button>
-<button class="mode-tab" data-mode="core">Core</button>
-<button class="mode-tab" data-mode="part2">Part 2</button>
+<span class="practice-label">Infinite practice</span>
 </div></div>
 <iframe id="engine" class="engine" title="Thermodynamics practice engine"></iframe>
 </section>
@@ -71,16 +68,16 @@
 <script>
 const $=s=>document.querySelector(s);
 const engine=$("#engine");
-const state={mode:new URLSearchParams(location.search).get("mode")||"infinite",attempted:0,correct:0,items:[]};
+const state={mode:"infinite",attempted:0,correct:0,items:[]};
 const modes={core:"ThermodynamicsCore.html",part2:"ThermodynamicsPart2Engine.html"};
 function icon(){if(window.lucide)lucide.createIcons();}
-function load(mode){
- state.mode=mode;
- const src=modes[mode]||modes[Math.random()<.5?"core":"part2"];
+function load(){
+ state.mode="infinite";
+ const src=Math.random()<.5?modes.core:modes.part2;
  engine.src=src;
  document.querySelectorAll(".mode-tab").forEach(x=>x.classList.toggle("active",x.dataset.mode===mode));
 }
-function next(){load(state.mode==="infinite"?(Math.random()<.5?"core":"part2"):state.mode);}
+function next(){load();}
 function renderReport(){
  $("#attempted").textContent=state.attempted;$("#correct").textContent=state.correct;
  $("#accuracy").textContent=state.attempted?Math.round(state.correct/state.attempted*100)+"%":"0%";
@@ -90,7 +87,7 @@ $("#learnBtn").onclick=()=>$("#learn").classList.add("open");$("#closeLearn").on
 $("#reportBtn").onclick=()=>{$("#report").classList.add("open");renderReport()};
 $("#closeReport").onclick=()=>$("#report").classList.remove("open");
 $("#themeBtn").onclick=()=>{const theme=document.documentElement.classList.toggle("dark")?"dark":"light";localStorage.setItem("poeTheme",theme);engine.contentWindow?.postMessage({type:"poe-theme",theme},"*");icon()};
-document.querySelectorAll(".mode-tab").forEach(b=>b.onclick=()=>load(b.dataset.mode));window.addEventListener("message",function(e){
+window.addEventListener("message",function(e){
   if(e.data?.type!=="poe-attempt")return;
   state.attempted++;
   if(e.data.correct)state.correct++;
@@ -98,6 +95,6 @@ document.querySelectorAll(".mode-tab").forEach(b=>b.onclick=()=>load(b.dataset.m
   renderReport();
 });
 
-(function(){const t=localStorage.getItem("poeTheme")||"light";document.documentElement.classList.toggle("dark",t==="dark");load(state.mode);icon()})();
+(function(){const t=localStorage.getItem("poeTheme")||"light";document.documentElement.classList.toggle("dark",t==="dark");load();icon()})();
 </script>
 </body></html>
