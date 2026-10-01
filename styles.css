@@ -78,3 +78,11 @@ button:active{transform:translateY(1px)}
   .tools-grid{grid-template-columns:1fr}
   .hero{padding:20px}
 }
+
+/* Shared POE brand alignment */
+.brand{display:flex!important;align-items:center!important;gap:11px!important;padding:18px 18px 16px!important;min-height:70px!important}
+.brand>div:last-child{min-width:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:2px!important}
+.brand strong,.brand span{display:block!important;line-height:1.05!important}
+.brand strong{font-family:"Space Grotesk",sans-serif!important;font-size:16px!important;letter-spacing:-.02em!important}
+.brand span{font-size:9px!important;letter-spacing:.13em!important;color:var(--muted)!important}
+.brand-mark{flex:0 0 36px!important}
