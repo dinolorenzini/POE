@@ -24,7 +24,7 @@ Main experiences:
 5. Incorrect answers reveal the existing formula/hint/worked-example guidance.
 6. Use **Report** to review the current session, including submitted and expected answers.
 7. Use **Learn Mode** for a guided problem-solving workflow.
-8. Use **Calculator** to open the Desmos scientific calculator.
+8. Use the embedded Desmos scientific calculator in the practice workspace; the dashboard also provides a Desmos shortcut.
 
 The original problem engines are intentionally kept separate internally so that their existing generators and educational content are not lost during UI work.
 
