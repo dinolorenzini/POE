@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progressive Circuit Lab</title>
+    <title>POE — Circuits Practice</title>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"],["$","$"]]},svg:{fontCache:"global"}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -284,13 +286,16 @@ body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!import
         }
 
         function triggerMathJax() {
-            if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise([document.getElementById("promptText"),document.getElementById("formulaBar"),document.getElementById("hintBox")]).catch(()=>{});
+            }
         }
 
         function renderCurrentState() {
             const st = window.activeState;
             document.getElementById('scenarioTitle').innerText = 'Level ' + (window.score + 1) + ' of 10';
             document.getElementById('promptText').innerHTML = st.prompt;
+            document.getElementById('formulaBar').innerHTML = '';
             for (let i = 0; i < 3; i++) {
                 const box = st.valBoxes[i];
                 document.getElementById('lbl' + (i + 1)).innerText = box ? box.label : '--';
@@ -298,6 +303,7 @@ body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!import
             }
             document.getElementById('inNum').value = '';
             renderUnitSelector(st.unitOptions);
+            requestAnimationFrame(triggerMathJax);
             const fb = document.getElementById('fb1'); fb.innerText = ''; fb.className = 'feedback mt-4 hidden rounded-xl px-3 py-2 text-sm font-semibold'; fb.style.display = 'none';
             document.getElementById('formulaBar').style.display = 'none';
             document.getElementById('hintBox').style.display = 'none';
@@ -364,3 +370,11 @@ window.poeNotice=function(message){
 };
 </script></body>
 </html>
+
+<style id="poe-circuit-math">
+/* Circuit math is rendered by MathJax, not shown as raw TeX. */
+.prompt-text{font-size:16px!important;line-height:1.7!important}
+.prompt-text mjx-container,.formula-bar mjx-container,.hint-box mjx-container{font-size:110%!important}
+.formula-bar{font-family:"DM Sans",system-ui,sans-serif!important;font-size:15px!important;line-height:1.7!important;padding:13px 15px!important}
+.example-text,.worked-example{line-height:1.65!important}
+</style>
