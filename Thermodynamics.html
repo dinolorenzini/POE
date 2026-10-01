@@ -26,6 +26,14 @@
 .mode-tab{min-height:34px;font-weight:700;font-size:12px}
 .engine{height:calc(100vh - 202px);min-height:720px}
 @media(max-width:900px){.thermo-main{padding:18px}.engine{min-height:780px}}
+
+.workspace-head{padding:7px 10px!important;background:transparent!important;border-bottom:1px solid var(--border)!important}
+.workspace-head .eyebrow{display:none!important}
+.mode-tabs{gap:2px!important}
+.mode-tab{border:0!important;background:transparent!important;padding:7px 10px!important;color:var(--muted)!important}
+.mode-tab:hover{background:var(--surface-2)!important}
+.mode-tab.active{background:var(--accent)!important;color:var(--bg)!important}
+.toolbar .btn{min-height:34px!important}
 </style>
 </head>
 <body>
@@ -44,14 +52,14 @@
 <header class="topbar"><div><div class="eyebrow">Principles of Engineering</div><div class="title">Thermodynamics</div></div><div class="toolbar">
 <button class="btn icon-btn" id="nextBtn"><i data-lucide="shuffle"></i>New problem</button>
 <button class="btn icon-btn" id="learnBtn"><i data-lucide="graduation-cap"></i>Learn Mode</button><button class="btn icon-btn" id="reportBtn"><i data-lucide="clipboard-list"></i>Report</button>
-<button class="btn icon-btn" id="calcBtn"><i data-lucide="calculator"></i>Calculator</button>
+
 </div></header>
 <section class="workspace">
 <div class="workspace-head"><div class="mode-tabs">
 <button class="mode-tab active" data-mode="infinite">Infinite practice</button>
 <button class="mode-tab" data-mode="core">Core</button>
 <button class="mode-tab" data-mode="part2">Part 2</button>
-</div><span class="eyebrow" id="modeLabel">RANDOMIZED • NO LIMIT</span></div>
+</div></div>
 <iframe id="engine" class="engine" title="Thermodynamics practice engine"></iframe>
 </section>
 </main>
