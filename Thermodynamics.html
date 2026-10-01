@@ -24,7 +24,7 @@
 .workspace-head{min-height:54px;padding:9px 12px}
 .mode-tabs{flex-wrap:wrap}
 .mode-tab{min-height:34px;font-weight:700;font-size:12px}
-.engine{height:calc(100vh - 202px);min-height:720px}
+.engine{height:calc(100vh - 202px);min-height:620px}
 @media(max-width:900px){.thermo-main{padding:18px}.engine{min-height:780px}}
 
 .workspace-head{padding:7px 10px!important;background:transparent!important;border-bottom:1px solid var(--border)!important}
@@ -87,6 +87,7 @@ $("#learnBtn").onclick=()=>$("#learn").classList.add("open");$("#closeLearn").on
 $("#reportBtn").onclick=()=>{$("#report").classList.add("open");renderReport()};
 $("#closeReport").onclick=()=>$("#report").classList.remove("open");
 $("#themeBtn").onclick=()=>{const theme=document.documentElement.classList.toggle("dark")?"dark":"light";localStorage.setItem("poeTheme",theme);engine.contentWindow?.postMessage({type:"poe-theme",theme},"*");icon()};
+engine.addEventListener("load",()=>{const theme=localStorage.getItem("poeTheme")||"light";engine.contentWindow?.postMessage({type:"poe-theme",theme},"*");});
 window.addEventListener("message",function(e){
   if(e.data?.type!=="poe-attempt")return;
   state.attempted++;
