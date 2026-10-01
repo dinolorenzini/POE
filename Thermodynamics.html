@@ -17,6 +17,15 @@
 .report{position:fixed;right:20px;top:80px;width:min(560px,calc(100vw - 40px));max-height:75vh;overflow:auto;z-index:50;background:var(--surface);border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,.25);display:none}.report.open{display:block}
 .report-head{padding:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}.report-body{padding:14px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{border:1px solid var(--border);background:var(--surface-2);padding:10px}.stat b{font:700 20px "JetBrains Mono"}.attempt{border-top:1px solid var(--border);padding:10px 0}.attempt small{color:var(--muted)}
 @media(max-width:800px){.thermo-main{margin-left:0;width:100%;padding:12px}.engine{height:calc(100vh - 220px);min-height:600px}.sidebar{display:none}.stat-grid{grid-template-columns:1fr 1fr}}
+
+/* canonical workspace alignment */
+.thermo-main{max-width:1500px;margin-right:auto}
+.workspace{overflow:hidden}
+.workspace-head{min-height:54px;padding:9px 12px}
+.mode-tabs{flex-wrap:wrap}
+.mode-tab{min-height:34px;font-weight:700;font-size:12px}
+.engine{height:calc(100vh - 202px);min-height:720px}
+@media(max-width:900px){.thermo-main{padding:18px}.engine{min-height:780px}}
 </style>
 </head>
 <body>
