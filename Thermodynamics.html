@@ -75,7 +75,7 @@ function load(){
  state.mode="infinite";
  const src=Math.random()<.5?modes.core:modes.part2;
  engine.src=src;
- document.querySelectorAll(".mode-tab").forEach(x=>x.classList.toggle("active",x.dataset.mode===mode));
+
 }
 function next(){load();}
 function renderReport(){
