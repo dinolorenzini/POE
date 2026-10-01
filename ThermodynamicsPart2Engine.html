@@ -101,7 +101,39 @@ iframe{filter:none!important;background:#111!important}
     if(e.data&&e.data.type==='poe-next'&&typeof window.generate==='function') window.generate(false);
   });
 })();
-</script></head>
+</script>
+<style id="poe-ux-polish">
+/* Shared POE educational engine: make every question page read as one product */
+:root{--e-bg:#dfe1e3;--e-surface:#f4f5f6;--e-panel:#e7e9eb;--e-border:#b6b9bc;--e-dark:#777c80;--e-text:#17191b;--e-muted:#62676b;--e-accent:#252729}
+html.dark{--e-bg:#000;--e-surface:#0d0d0d;--e-panel:#151515;--e-border:#343434;--e-dark:#555;--e-text:#f1f1f1;--e-muted:#9b9b9b;--e-accent:#e5e5e5}
+html,body{background:var(--e-bg)!important;color:var(--e-text)!important}
+body{font-family:"DM Sans",system-ui,sans-serif!important;margin:0!important}
+.wrapper{width:min(1380px,100%)!important;min-height:100vh!important;margin:0 auto!important;padding:18px!important;display:grid!important;grid-template-columns:minmax(0,1.55fr) minmax(280px,.65fr)!important;gap:14px!important}
+.work-area,.side-panel{min-width:0!important;background:var(--e-surface)!important;border:1px solid var(--e-border)!important;border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.09)!important}
+.work-area{padding:18px!important}
+.side-panel{padding:16px!important}
+.header-flex{display:block!important;border:0!important;border-bottom:1px solid var(--e-border)!important;padding-bottom:14px!important;margin-bottom:16px!important}
+.level-bar{display:flex!important;flex-wrap:wrap!important;gap:5px!important;padding:0 0 12px!important;border:0!important}
+.lvl-btn{height:34px!important;padding:6px 10px!important;background:var(--e-panel)!important;color:var(--e-muted)!important;border:1px solid var(--e-border)!important;border-radius:5px!important;font:600 11px "DM Sans",sans-serif!important;box-shadow:none!important}
+.lvl-btn:hover,.lvl-btn.active{background:var(--e-accent)!important;color:var(--e-bg)!important;border-color:var(--e-accent)!important}
+#scenarioTitle{font:700 18px "Space Grotesk",sans-serif!important;color:var(--e-text)!important}
+#scoreDisplay{background:var(--e-panel)!important;color:var(--e-text)!important;border:1px solid var(--e-border)!important;border-radius:5px!important;padding:6px 10px!important;font:600 11px "JetBrains Mono",monospace!important}
+.prompt-text{background:var(--e-panel)!important;border:1px solid var(--e-border)!important;border-radius:6px!important;padding:16px!important;font-size:15px!important;line-height:1.65!important;color:var(--e-text)!important}
+.val-card{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;margin:12px 0!important}
+.val-box{background:var(--e-surface)!important;border:1px solid var(--e-border)!important;border-radius:5px!important;padding:10px!important;min-width:0!important}
+.val-label{color:var(--e-muted)!important;font-size:9px!important;letter-spacing:.1em!important}
+.val-data{color:var(--e-text)!important;font:700 13px "JetBrains Mono",monospace!important}
+.step{background:var(--e-surface)!important;border:1px solid var(--e-border)!important;border-radius:6px!important;padding:14px!important}
+.formula-bar{background:#090909!important;color:#f1f1f1!important;border:1px solid #333!important;border-radius:5px!important;padding:11px!important}
+input,select{background:var(--e-bg)!important;color:var(--e-text)!important;border:1px solid var(--e-border)!important;border-radius:5px!important;padding:9px 10px!important}
+.step button,.work-area button{background:var(--e-accent)!important;color:var(--e-bg)!important;border:1px solid var(--e-accent)!important;border-radius:5px!important;padding:8px 12px!important;font-weight:700!important}
+.feedback,.hint-box,.example-box{border-radius:5px!important;border:1px solid var(--e-border)!important;background:var(--e-panel)!important;color:var(--e-text)!important}
+.side-panel .ref-title{font:700 12px "JetBrains Mono",monospace!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--e-muted)!important}
+.side-panel .ref-eq,.ref-card{background:var(--e-panel)!important;border:1px solid var(--e-border)!important;color:var(--e-text)!important;border-radius:5px!important}
+.side-panel svg{max-width:100%!important}
+@media(max-width:900px){.wrapper{grid-template-columns:1fr!important}.side-panel{order:2}.val-card{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:520px){.wrapper{padding:10px!important}.work-area,.side-panel{padding:12px!important}.val-card{grid-template-columns:1fr!important}}
+</style></head>
 <body>
     <div class="wrapper">
         <div class="work-area">
