@@ -4,128 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Progressive Circuit Lab</title>
-    <!-- MathJax Library for LaTeX Math Rendering -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            },
-            svg: { fontCache: 'global' }
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    boxShadow: {
+                        glow: '0 20px 45px rgba(59,130,246,0.18)'
+                    }
+                }
+            }
         };
     </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <style>
-        :root { --primary: #1e293b; --accent: #d9480f; --bg: #f8fafc; --card: #ffffff; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: var(--bg); color: #0f172a; overflow: hidden; }
-        
-        .wrapper { display: grid; grid-template-columns: 1fr 280px 1fr 300px; height: 100vh; gap: 10px; padding: 10px; box-sizing: border-box; }
-        
-        .work-area { background: var(--card); padding: 16px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow-y: auto; }
-        .header-flex { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); margin-bottom: 12px; padding-bottom: 8px; }
-        .btn-back { background: #64748b; color: white; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
-        
-        .val-card { background: #f1f5f9; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-        .val-box { border-left: 3px solid var(--primary); padding-left: 8px; }
-        .val-label { font-size: 0.65em; text-transform: uppercase; color: #64748b; font-weight: bold; display: block; }
-        .val-data { font-size: 0.85em; font-weight: 800; color: #0f172a; word-break: break-word; }
-        
-        .prompt-text { background: #fff8ec; border: 1px solid #f1e2c0; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9em; line-height: 1.4; }
-        .step { border: 2px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 8px; background: #fff; }
-        
-        .formula-bar { background: #1e293b; color: #38bdf8; padding: 10px; border-radius: 6px; text-align: center; margin: 8px 0; font-size: 0.9em; display: none; font-weight: bold; }
-        .feedback { margin-top: 8px; padding: 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; display: none; }
-        .correct { background: #dcfce7; color: #166534; display: block !important; }
-        .incorrect { background: #fee2e2; color: #991b1b; display: block !important; }
-        .hint-box { background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1; padding: 10px; border-radius: 6px; font-size: 0.85em; margin-top: 8px; display: none; line-height: 1.5; }
-        
-        .calc-input-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
-        .unit-selector { display: flex; gap: 6px; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; border: 1px solid #cbd5e1; }
-        .unit-option { display: flex; align-items: center; gap: 2px; font-size: 0.8em; font-weight: bold; cursor: pointer; }
-
-        input[type="number"] { padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; width: 100px; font-weight: bold; }
-        button { padding: 8px 12px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-
-        .ref-card { background: var(--card); border-radius: 12px; padding: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow-y: auto; }
-        .ref-title { font-weight: bold; color: var(--primary); margin-bottom: 10px; font-size: 0.95em; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; }
-        .ref-item { background: #f8fafc; border-left: 3px solid #3b82f6; padding: 8px; margin-bottom: 10px; border-radius: 0 4px 4px 0; font-size: 0.8em; line-height: 1.4; }
-        .ref-item strong { color: #1e293b; display: block; margin-bottom: 4px; }
-
-        .schematic-card { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
-        .schematic-title { font-weight: bold; color: var(--primary); margin-bottom: 8px; font-size: 0.95em; text-align: center; border-bottom: 2px solid #e2e8f0; width: 100%; padding-bottom: 4px; }
-        .svg-container { width: 100%; height: 100%; min-height: 380px; display: flex; justify-content: center; align-items: center; background: #ffffff; border: 2px solid #e2e8f0; border-radius: 8px; }
-
-        iframe { width: 100%; height: 100%; border: none; }
+        body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+        .work-area { background: rgba(255,255,255,0.9); }
+        .dark .work-area { background: rgba(15,23,42,0.9); }
+        .formula-bar { background: #0f172a; color: #7dd3fc; }
+        .dark .formula-bar { background: #111827; }
+        .correct { background: #dcfce7; color: #166534; }
+        .incorrect { background: #fee2e2; color: #991b1b; }
+        .hint-box { background: #eff6ff; color: #1d4ed8; }
+        .dark .hint-box { background: rgba(30,41,59,0.8); color: #bfdbfe; }
+        .unit-option { display: flex; align-items: center; gap: 6px; }
+        .lvl-btn.active { box-shadow: 0 0 0 2px rgba(59,130,246,.25); }
     </style>
 </head>
-<body>
-    <div class="wrapper">
-        <!-- COLUMN 1: Problem & Step Submission -->
-        <div class="work-area">
-            <div class="header-flex">
-                <a href="#" class="btn-back">← Back</a>
-                <h1 id="scenarioTitle" style="font-size: 1.0em; margin: 0;">Level 1</h1>
-                <div id="scoreDisplay" style="background:var(--accent); color:white; padding:4px 8px; border-radius:20px; font-size:0.75em; font-weight:bold;">Progress: 0/10</div>
-            </div>
-
-            <div class="prompt-text" id="promptText">Loading problem...</div>
-
-            <div class="val-card" id="valCard">
-                <div class="val-box"><span class="val-label" id="lbl1">--</span><span class="val-data" id="val1">--</span></div>
-                <div class="val-box"><span class="val-label" id="lbl2">--</span><span class="val-data" id="val2">--</span></div>
-                <div class="val-box"><span class="val-label" id="lbl3">--</span><span class="val-data" id="val3">--</span></div>
-            </div>
-
-            <div id="step1" class="step">
-                <strong>Step 1: Calculate Answer and Select Unit</strong>
-                <div class="formula-bar" id="formulaBar"></div>
-                <div class="calc-input-group">
-                    <input type="number" step="any" id="inNum" placeholder="Value">
-                    <div class="unit-selector" id="unitBoxContainer"></div>
-                    <button onclick="window.checkCalculation()">Verify Answer</button>
+<body class="min-h-screen bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+    <div class="min-h-screen flex">
+        <aside class="w-72 bg-white/90 dark:bg-slate-900/90 border-r border-slate-200 dark:border-slate-700 sticky top-0 h-screen p-6 shrink-0">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-xl text-white shadow-glow">⚡</div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-tight">POE</h1>
+                    <p class="text-[10px] uppercase tracking-[0.25em] text-slate-500">Academy</p>
                 </div>
-                <div id="fb1" class="feedback"></div>
-                <div id="hintBox" class="hint-box"></div>
             </div>
-        </div>
+            <nav class="space-y-2">
+                <a href="index.html" class="block rounded-xl px-4 py-3 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">🏠 Dashboard</a>
+                <button onclick="toggleLearnMode()" class="w-full text-left rounded-xl px-4 py-3 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">🎓 Learn mode</button>
+                <button onclick="toggleTheme()" class="w-full text-left rounded-xl px-4 py-3 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">🌙 Theme</button>
+            </nav>
+            <div class="mt-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-700 p-4">
+                <p class="text-[10px] uppercase tracking-[0.25em] text-slate-500 mb-3">status</p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between"><span>Progress</span><span id="sidebarProgress" class="font-bold text-blue-600 dark:text-blue-400">0/10</span></div>
+                    <div class="flex justify-between"><span>Wrong</span><span id="sidebarWrong" class="font-bold text-slate-800 dark:text-slate-200">0</span></div>
+                </div>
+            </div>
+        </aside>
 
-        <!-- COLUMN 2: General Reference Formulas -->
-        <div class="ref-card">
-            <div class="ref-title">📖 Reference Formulas</div>
-            <div class="ref-item">
-                <strong>Ohm's Law</strong>
-                $$V = I \cdot R \quad\mid\quad I = \frac{V}{R} \quad\mid\quad R = \frac{V}{I}$$
-            </div>
-            <div class="ref-item">
-                <strong>Power Formulas</strong>
-                $$P = V \cdot I \quad\mid\quad P = I^2 \cdot R \quad\mid\quad P = \frac{V^2}{R}$$
-            </div>
-            <div class="ref-item">
-                <strong>Series Circuits</strong>
-                $$R_{\text{eq}} = R_1 + R_2 + \dots + R_n$$
-                $$I_{\text{total}} = I_1 = I_2 = \dots = I_n$$
-            </div>
-            <div class="ref-item">
-                <strong>Parallel Circuits (Reciprocal)</strong>
-                $$\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}$$
-                $$R_{\text{eq}} = \left( \sum_{i=1}^{n} \frac{1}{R_i} \right)^{-1}$$
-            </div>
-            <div class="ref-item">
-                <strong>Voltage Divider (Series)</strong>
-                $$V_x = V_s \cdot \left( \frac{R_x}{R_{\text{total}}} \right)$$
-            </div>
-        </div>
+        <main class="flex-1 p-6 lg:p-8">
+            <header class="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.25em] text-slate-500">Circuit practice</p>
+                    <h2 class="text-3xl font-black tracking-tight">Circuits</h2>
+                </div>
+                <div class="rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 text-sm font-bold text-white shadow-lg" id="scoreDisplay">Progress: 0/10</div>
+            </header>
 
-        <!-- COLUMN 3: Circuit Schematic Container -->
-        <div class="schematic-card">
-            <div class="schematic-title">Workbench Schematic</div>
-            <div class="svg-container" id="schematicContainer"></div>
-        </div>
+            <div class="grid grid-cols-1 xl:grid-cols-[1.2fr_0.8fr_1.2fr_0.8fr] gap-6">
+                <section class="work-area rounded-3xl border border-slate-200 dark:border-slate-700 shadow-glow p-5 lg:p-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-5">
+                        <a href="index.html" class="rounded-xl bg-slate-100 dark:bg-slate-800 px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200">← Back</a>
+                        <h3 id="scenarioTitle" class="text-xl font-bold">Level 1</h3>
+                    </div>
 
-        <!-- COLUMN 4: Calculator Integration -->
-        <div style="background:#f1f5f9; border-radius:12px; overflow:hidden;">
-            <iframe src="https://www.desmos.com/scientific"></iframe>
+                    <div class="prompt-text rounded-2xl border border-amber-200 bg-amber-50 dark:border-amber-700 dark:bg-slate-800/80 p-4 text-sm leading-6" id="promptText">Loading problem...</div>
+
+                    <div class="val-card mt-5 grid grid-cols-3 gap-3" id="valCard">
+                        <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-3"><span class="block text-[10px] uppercase tracking-[0.2em] text-slate-500" id="lbl1">--</span><span class="mt-1 block text-sm font-bold" id="val1">--</span></div>
+                        <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-3"><span class="block text-[10px] uppercase tracking-[0.2em] text-slate-500" id="lbl2">--</span><span class="mt-1 block text-sm font-bold" id="val2">--</span></div>
+                        <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-3"><span class="block text-[10px] uppercase tracking-[0.2em] text-slate-500" id="lbl3">--</span><span class="mt-1 block text-sm font-bold" id="val3">--</span></div>
+                    </div>
+
+                    <div id="step1" class="mt-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <strong class="text-base font-bold">Step 1: Calculate Answer and Select Unit</strong>
+                            <button onclick="toggleLearnMode()" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-700 dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-200">Learn</button>
+                        </div>
+                        <div class="formula-bar rounded-xl px-4 py-3 text-sm font-medium mb-3" id="formulaBar" style="display:none"></div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <input type="number" step="any" id="inNum" placeholder="Value" class="rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800">
+                            <div id="unitBoxContainer" class="flex flex-wrap gap-2"></div>
+                            <button onclick="window.checkCalculation()" class="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2.5 text-sm font-bold text-white shadow-lg">Verify Answer</button>
+                        </div>
+                        <div id="fb1" class="feedback mt-4 hidden rounded-xl px-3 py-2 text-sm font-semibold"></div>
+                        <div id="hintBox" class="hint-box mt-4 hidden rounded-xl border border-blue-200 p-3 text-sm"></div>
+                    </div>
+                </section>
+
+                <div class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg p-4">
+                    <div class="text-sm font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300 mb-4">Reference</div>
+                    <div class="space-y-3 text-[11px] leading-5">
+                        <div class="rounded-xl bg-slate-100 dark:bg-slate-800 p-3"><strong class="block mb-1">Ohm's Law</strong> $$V = I \cdot R$$</div>
+                        <div class="rounded-xl bg-slate-100 dark:bg-slate-800 p-3"><strong class="block mb-1">Power</strong> $$P = V \cdot I$$</div>
+                        <div class="rounded-xl bg-slate-100 dark:bg-slate-800 p-3"><strong class="block mb-1">Series</strong> $$R_eq = R_1 + R_2 + \dots$$</div>
+                        <div class="rounded-xl bg-slate-100 dark:bg-slate-800 p-3"><strong class="block mb-1">Parallel</strong> $$\frac{1}{R_eq} = \frac{1}{R_1} + \frac{1}{R_2} + \dots$$</div>
+                    </div>
+                </div>
+
+                <div class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg p-4">
+                    <div class="text-sm font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300 mb-4">Workbench</div>
+                    <div id="schematicContainer" class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 min-h-[320px]"></div>
+                </div>
+
+                <div class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg overflow-hidden">
+                    <iframe src="https://www.desmos.com/scientific" title="Scientific calculator" class="w-full h-[320px] border-0"></iframe>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="learnDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md translate-x-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-700 p-6 shadow-2xl transition-transform duration-300">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-black">Learn mode</h3>
+            <button onclick="toggleLearnMode()" class="rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1 text-sm">Close</button>
         </div>
+        <div id="learnContent" class="space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200"></div>
     </div>
 
     <script>
@@ -133,10 +130,41 @@
         window.score = parseInt(localStorage.getItem('score_circuits_v11')) || 0;
         window.wrongAttempts = 0;
 
-        const COLOR_MAP = {
-            '0': '#000000', '1': '#78350f', '2': '#dc2626', '3': '#ea580c', '4': '#eab308',
-            '5': '#16a34a', '6': '#2563eb', '7': '#9333ea', '8': '#475569', '9': '#ffffff', 'gold': '#eab308'
-        };
+        function toggleTheme() {
+            const root = document.documentElement;
+            const isDark = root.classList.toggle('dark');
+            localStorage.setItem('poeTheme', isDark ? 'dark' : 'light');
+        }
+
+        function applyTheme() {
+            const theme = localStorage.getItem('poeTheme') || 'light';
+            document.documentElement.classList.toggle('dark', theme === 'dark');
+        }
+
+        function toggleLearnMode() {
+            const el = document.getElementById('learnDrawer');
+            const open = el.classList.contains('translate-x-full');
+            el.classList.toggle('translate-x-full', !open);
+            el.classList.toggle('translate-x-0', open);
+            if (open) {
+                document.getElementById('learnContent').innerHTML = `
+                    <div class="rounded-2xl bg-blue-50 dark:bg-slate-800 p-4 border border-blue-200 dark:border-blue-700">
+                        <p class="font-bold text-blue-700 dark:text-blue-300 mb-2">1. Read the circuit type</p>
+                        <p>Decide whether it is series, parallel, or a combination network before selecting a formula.</p>
+                    </div>
+                    <div class="rounded-2xl bg-violet-50 dark:bg-slate-800 p-4 border border-violet-200 dark:border-violet-700">
+                        <p class="font-bold text-violet-700 dark:text-violet-300 mb-2">2. Use the formulas</p>
+                        <p>Start with equivalent resistance, then branch current or voltage division as needed.</p>
+                    </div>
+                    <div class="rounded-2xl bg-amber-50 dark:bg-slate-800 p-4 border border-amber-200 dark:border-amber-700">
+                        <p class="font-bold text-amber-700 dark:text-amber-300 mb-2">3. Check units</p>
+                        <p>Make sure the final answer matches the required unit such as mA, V, kΩ, or W.</p>
+                    </div>
+                `;
+            }
+        }
+
+        const COLOR_MAP = { '0': '#000000', '1': '#78350f', '2': '#dc2626', '3': '#ea580c', '4': '#eab308', '5': '#16a34a', '6': '#2563eb', '7': '#9333ea', '8': '#475569', '9': '#ffffff', 'gold': '#eab308' };
 
         function getResistorBands(valInOhms) {
             if (!valInOhms || valInOhms <= 0) return ['#000000', '#000000', '#000000', '#eab308'];
@@ -144,187 +172,35 @@
             let sig = Math.round(valInOhms / Math.pow(10, exp));
             if (sig >= 100) { sig = Math.round(sig / 10); exp += 1; }
             let str = sig.toString().padStart(2, '0');
-            return [
-                COLOR_MAP[str[0]] || '#000000',
-                COLOR_MAP[str[1]] || '#000000',
-                COLOR_MAP[exp.toString()] || '#000000',
-                COLOR_MAP['gold']
-            ];
+            return [COLOR_MAP[str[0]] || '#000000', COLOR_MAP[str[1]] || '#000000', COLOR_MAP[exp.toString()] || '#000000', COLOR_MAP['gold']];
         }
 
         const LEVEL_TEMPLATES = [
-            {
-                type: 'series', numResistors: 1, targetUnit: "mA", unitOptions: ["A", "mA", "μA"],
-                generate: () => {
-                    const Vs = 12; const R1 = Math.floor(Math.random() * 30 + 15) * 10;
-                    const targetNum = parseFloat(((Vs / R1) * 1000).toFixed(2));
-                    return {
-                        Vs, R1, targetNum,
-                        prompt: `Level 1 (Simple Series): Supply voltage $V_s = ${Vs}\\text{ V}$ is connected across resistor $R_1 = ${R1}\\text{ }\\Omega$. Calculate current $I$ in milliamperes (mA).`,
-                        valBoxes: [{ label: "Voltage", value: `${Vs} V` }, { label: "R1", value: `${R1} Ω` }, { label: "Find", value: "Current (I)" }],
-                        formula: "$$I\\text{ (mA)} = \\left( \\frac{V_s}{R_1} \\right) \\times 1000$$",
-                        example: "💡 <strong>Worked Example:</strong> If $V_s = 10\\text{ V}$ and $R_1 = 500\\text{ }\\Omega$:<br>• Step 1: $\\frac{10\\text{ V}}{500\\text{ }\\Omega} = 0.02\\text{ A}$<br>• Step 2: $0.02\\text{ A} \\times 1000 = 20\\text{ mA}$."
-                    };
-                }
-            },
-            {
-                type: 'series', numResistors: 2, targetUnit: "kΩ", unitOptions: ["Ω", "kΩ", "MΩ"],
-                generate: () => {
-                    const Vs = 24; const R1 = Math.floor(Math.random() * 10 + 10) * 100; const R2 = Math.floor(Math.random() * 10 + 5) * 100;
-                    const targetNum = parseFloat(((R1 + R2) / 1000).toFixed(2));
-                    return {
-                        Vs, R1, R2, targetNum,
-                        prompt: `Level 2 (Series Equivalent): Series resistors $R_1 = ${(R1/1000).toFixed(1)}\\text{ k}\\Omega$ and $R_2 = ${(R2/1000).toFixed(1)}\\text{ k}\\Omega$ are connected to $V_s = ${Vs}\\text{ V}$. Calculate total resistance ($R_{\\text{eq}}$) in kilohms (kΩ).`,
-                        valBoxes: [{ label: "Voltage", value: `${Vs} V` }, { label: "R1", value: `${(R1/1000).toFixed(1)} kΩ` }, { label: "R2", value: `${(R2/1000).toFixed(1)} kΩ` }],
-                        formula: "$$R_{\\text{eq}}\\text{ (k}\\Omega\\text{)} = R_1\\text{ (k}\\Omega\\text{)} + R_2\\text{ (k}\\Omega\\text{)}$$",
-                        example: "💡 <strong>Worked Example:</strong> If $R_1 = 1.5\\text{ k}\\Omega$ and $R_2 = 3.5\\text{ k}\\Omega$:<br>• $R_{\\text{eq}} = 1.5 + 3.5 = 5.0\\text{ k}\\Omega$."
-                    };
-                }
-            },
-            {
-                type: 'series', numResistors: 2, targetUnit: "V", unitOptions: ["mV", "V", "kV"],
-                generate: () => {
-                    const Vs = 12; const R1 = 3300; const R2 = Math.floor(Math.random() * 40 + 40) * 100;
-                    const targetNum = parseFloat((Vs * (R2 / (R1 + R2))).toFixed(2));
-                    return {
-                        Vs, R1, R2, targetNum,
-                        prompt: `Level 3 (Voltage Divider): Supply $V_s = ${Vs}\\text{ V}$ across series resistors $R_1 = ${(R1/1000).toFixed(1)}\\text{ k}\\Omega$ and $R_2 = ${(R2/1000).toFixed(1)}\\text{ k}\\Omega$. Calculate voltage across $R_2$ ($V_{R2}$) in Volts.`,
-                        valBoxes: [{ label: "Vs", value: `${Vs} V` }, { label: "R1", value: `${(R1/1000).toFixed(1)} kΩ` }, { label: "R2", value: `${(R2/1000).toFixed(1)} kΩ` }],
-                        formula: "$$V_{R2} = V_s \\cdot \\left( \\frac{R_2}{R_1 + R_2} \\right)$$",
-                        example: "💡 <strong>Worked Example:</strong> If $V_s = 10\\text{ V}, R_1 = 2\\text{ k}\\Omega, R_2 = 3\\text{ k}\\Omega$:<br>• $R_{\\text{total}} = 2 + 3 = 5\\text{ k}\\Omega$<br>• $V_{R2} = 10\\text{ V} \\cdot \\left(\\frac{3}{5}\\right) = 6\\text{ V}$."
-                    };
-                }
-            },
-            {
-                type: 'parallel3', numResistors: 3, targetUnit: "Ω", unitOptions: ["Ω", "kΩ", "mΩ"],
-                generate: () => {
-                    const Vs = 12; 
-                    const R1 = Math.floor(Math.random() * 3 + 2) * 100;
-                    const R2 = Math.floor(Math.random() * 3 + 2) * 100;
-                    const R3 = Math.floor(Math.random() * 3 + 2) * 100;
-                    const targetNum = parseFloat((1 / ((1 / R1) + (1 / R2) + (1 / R3))).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, targetNum,
-                        prompt: `Level 4 (3-Resistor Parallel Network): Three parallel resistors $R_1 = ${R1}\\text{ }\\Omega$, $R_2 = ${R2}\\text{ }\\Omega$, and $R_3 = ${R3}\\text{ }\\Omega$ are connected across $V_s = ${Vs}\\text{ V}$. Calculate parallel resistance ($R_{\\text{eq}}$) in Ohms (Ω).`,
-                        valBoxes: [{ label: "R1", value: `${R1} Ω` }, { label: "R2", value: `${R2} Ω` }, { label: "R3", value: `${R3} Ω` }],
-                        formula: "$$\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3} \\implies R_{\\text{eq}} = \\left( \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3} \\right)^{-1}$$",
-                        example: "💡 <strong>Worked Example:</strong> If $R_1 = 100\\,\\Omega, R_2 = 200\\,\\Omega, R_3 = 200\\,\\Omega$:<br>• $\\frac{1}{R_{\\text{eq}}} = \\frac{1}{100} + \\frac{1}{200} + \\frac{1}{200} = 0.01 + 0.005 + 0.005 = 0.02$<br>• $R_{\\text{eq}} = \\frac{1}{0.02} = 50\\text{ }\\Omega$."
-                    };
-                }
-            },
-            {
-                type: 'parallel3', numResistors: 3, targetUnit: "mA", unitOptions: ["A", "mA", "μA"],
-                generate: () => {
-                    const Vs = 24; const R1 = 1000; const R2 = Math.floor(Math.random() * 3 + 2) * 1000; const R3 = 4000;
-                    const targetNum = parseFloat(((Vs / R2) * 1000).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, targetNum,
-                        prompt: `Level 5 (Branch Current in 3-Way Parallel): $V_s = ${Vs}\\text{ V}$ connected across parallel network ($R_1 = ${(R1/1000).toFixed(1)}\\text{ k}\\Omega \\parallel R_2 = ${(R2/1000).toFixed(1)}\\text{ k}\\Omega \\parallel R_3 = ${(R3/1000).toFixed(1)}\\text{ k}\\Omega$). Find current through $R_2$ ($I_{R2}$) in milliamperes (mA).`,
-                        valBoxes: [{ label: "Vs", value: `${Vs} V` }, { label: "Target Branch", value: "R2" }, { label: "R2 Value", value: `${(R2/1000).toFixed(1)} kΩ` }],
-                        formula: "$$I_{R2}\\text{ (mA)} = \\left( \\frac{V_s}{R_2} \\right) \\times 1000$$",
-                        example: "💡 <strong>Worked Example:</strong> In parallel, voltage across each branch equals $V_s$.<br>• If $V_s = 12\\text{ V}$ and $R_2 = 3000\\text{ }\\Omega$:<br>• $I_{R2} = \\frac{12}{3000} = 0.004\\text{ A} = 4\\text{ mA}$."
-                    };
-                }
-            },
-            {
-                type: 'parallel3', numResistors: 3, targetUnit: "mA", unitOptions: ["mA", "A", "μA"],
-                generate: () => {
-                    const Vs = 12; const R1 = 300; const R2 = 400; const R3 = Math.floor(Math.random() * 4 + 2) * 100;
-                    const targetNum = parseFloat((((Vs / R1) + (Vs / R2) + (Vs / R3)) * 1000).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, targetNum,
-                        prompt: `Level 6 (Total Parallel Current): $V_s = ${Vs}\\text{ V}$ across 3 parallel resistors $R_1 = ${R1}\\text{ }\\Omega$, $R_2 = ${R2}\\text{ }\\Omega$, and $R_3 = ${R3}\\text{ }\\Omega$. Calculate total source current ($I_{\\text{total}}$) in milliamperes (mA).`,
-                        valBoxes: [{ label: "R1", value: `${R1} Ω` }, { label: "R2", value: `${R2} Ω` }, { label: "R3", value: `${R3} Ω` }],
-                        formula: "$$I_{\\text{total}}\\text{ (mA)} = \\left( \\frac{V_s}{R_1} + \\frac{V_s}{R_2} + \\frac{V_s}{R_3} \\right) \\times 1000$$",
-                        example: "💡 <strong>Worked Example:</strong> If $V_s = 10\\text{ V}, R_1 = 100\\,\\Omega, R_2 = 200\\,\\Omega, R_3 = 500\\,\\Omega$:<br>• $I_1 = 0.1\\text{ A}, I_2 = 0.05\\text{ A}, I_3 = 0.02\\text{ A}$<br>• $I_{\\text{total}} = (0.1 + 0.05 + 0.02) \\times 1000 = 170\\text{ mA}$."
-                    };
-                }
-            },
-            {
-                type: 'combo', numResistors: 4, targetUnit: "Ω", unitOptions: ["Ω", "kΩ", "mΩ"],
-                generate: () => {
-                    const Vs = 12; const R1 = Math.floor(Math.random() * 5 + 5) * 10; 
-                    const R2 = 300; const R3 = 300; const R4 = 300;
-                    const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4));
-                    const targetNum = parseFloat((R1 + Rp).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, R4, targetNum,
-                        prompt: `Level 7 (Combination Circuit): $R_1 = ${R1}\\text{ }\\Omega$ in series with a 3-resistor parallel bank ($R_2 = ${R2}\\text{ }\\Omega \\parallel R_3 = ${R3}\\text{ }\\Omega \\parallel R_4 = ${R4}\\text{ }\\Omega$). Find total input resistance ($R_{\\text{eq}}$) in Ohms (Ω).`,
-                        valBoxes: [{ label: "Vs", value: `${Vs} V` }, { label: "R1 (Series)", value: `${R1} Ω` }, { label: "Parallel Bank", value: "300 || 300 || 300 Ω" }],
-                        formula: "$$R_{\\text{eq}} = R_1 + R_p \\quad\\text{where}\\quad \\frac{1}{R_p} = \\frac{1}{R_2} + \\frac{1}{R_3} + \\frac{1}{R_4}$$",
-                        example: "💡 <strong>Worked Example:</strong> If $R_1 = 50\\,\\Omega$, and $R_2=R_3=R_4=300\\,\\Omega$:<br>• $\\frac{1}{R_p} = \\frac{1}{300} + \\frac{1}{300} + \\frac{1}{300} = \\frac{3}{300} = \\frac{1}{100} \\implies R_p = 100\\text{ }\\Omega$<br>• $R_{\\text{eq}} = 50 + 100 = 150\\text{ }\\Omega$."
-                    };
-                }
-            },
-            {
-                type: 'combo', numResistors: 4, targetUnit: "mA", unitOptions: ["A", "mA", "μA"],
-                generate: () => {
-                    const Vs = 24; const R1 = 1000; const R2 = Math.floor(Math.random() * 3 + 2) * 1000; const R3 = 6000; const R4 = 6000;
-                    const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4));
-                    const Req = R1 + Rp;
-                    const targetNum = parseFloat(((Vs / Req) * 1000).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, R4, targetNum,
-                        prompt: `Level 8 (Combination Total Current): $V_s = ${Vs}\\text{ V}$ connected to series $R_1 = ${(R1/1000).toFixed(1)}\\text{ k}\\Omega$ and 3 parallel resistors ($R_2 = ${(R2/1000).toFixed(1)}\\text{ k}\\Omega \\parallel R_3 = ${(R3/1000).toFixed(1)}\\text{ k}\\Omega \\parallel R_4 = ${(R4/1000).toFixed(1)}\\text{ k}\\Omega$). Find total circuit current ($I_{\\text{total}}$) in milliamperes (mA).`,
-                        valBoxes: [{ label: "Vs", value: `${Vs} V` }, { label: "R1", value: `${(R1/1000).toFixed(1)} kΩ` }, { label: "Req Parallel", value: "Calculate 1/Rp" }],
-                        formula: "$$I_{\\text{total}}\\text{ (mA)} = \\left( \\frac{V_s}{R_1 + R_p} \\right) \\times 1000 \\quad\\text{where}\\quad \\frac{1}{R_p} = \\frac{1}{R_2} + \\frac{1}{R_3} + \\frac{1}{R_4}$$",
-                        example: "💡 <strong>Worked Example:</strong> If $V_s = 12\\text{ V}, R_1 = 2\\text{ k}\\Omega, R_p = 1\\text{ k}\\Omega$:<br>• $R_{\\text{eq}} = 2\\text{ k}\\Omega + 1\\text{ k}\\Omega = 3\\text{ k}\\Omega\\text{ }(3000\\text{ }\\Omega)$<br>• $I_{\\text{total}} = \\left(\\frac{12}{3000}\\right) \\times 1000 = 4\\text{ mA}$."
-                    };
-                }
-            },
-            {
-                type: 'combo', numResistors: 4, targetUnit: "mA", unitOptions: ["A", "mA", "μA"],
-                generate: () => {
-                    const Vs = 18; const R1 = 1200; const R2 = 3000; const R3 = Math.floor(Math.random() * 3 + 2) * 1000; const R4 = 6000;
-                    const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4));
-                    const Req = R1 + Rp;
-                    const Itotal = Vs / Req;
-                    const Vp = Itotal * Rp;
-                    const targetNum = parseFloat(((Vp / R3) * 1000).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, R4, targetNum,
-                        prompt: `Level 9 (Combination Branch Split): $V_s = ${Vs}\\text{ V}$ into $R_1 = ${(R1/1000).toFixed(1)}\\text{ k}\\Omega$ in series with 3 parallel resistors ($R_2 = ${(R2/1000).toFixed(1)}\\text{ k}\\Omega \\parallel R_3 = ${(R3/1000).toFixed(1)}\\text{ k}\\Omega \\parallel R_4 = ${(R4/1000).toFixed(1)}\\text{ k}\\Omega$). Calculate current through $R_3$ ($I_{R3}$) in milliamperes (mA).`,
-                        valBoxes: [{ label: "Vs", value: `${Vs} V` }, { label: "R1", value: `${(R1/1000).toFixed(1)} kΩ` }, { label: "R3 Target", value: `${(R3/1000).toFixed(1)} kΩ` }],
-                        formula: "$$I_{R3} = \\frac{V_p}{R_3} \\quad\\text{where}\\quad V_p = I_{\\text{total}} \\cdot R_p$$",
-                        example: "💡 <strong>Worked Example:</strong> If $V_s = 20\\text{ V}, R_1 = 1\\text{ k}\\Omega, R_p = 1\\text{ k}\\Omega, R_3 = 3\\text{ k}\\Omega$:<br>• $R_{\\text{eq}} = 2\\text{ k}\\Omega \\implies I_{\\text{total}} = 10\\text{ mA}$<br>• $V_p = 10\\text{ mA} \\times 1\\text{ k}\\Omega = 10\\text{ V}$<br>• $I_{R3} = \\frac{10\\text{ V}}{3\\text{ k}\\Omega} = 3.33\\text{ mA}$."
-                    };
-                }
-            },
-            {
-                type: 'combo', numResistors: 4, targetUnit: "mW", unitOptions: ["mW", "W", "μW"],
-                generate: () => {
-                    const Vs = 30; const R1 = Math.floor(Math.random() * 4 + 3) * 100; const R2 = 1500; const R3 = 1500; const R4 = 1500;
-                    const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4));
-                    const Req = R1 + Rp;
-                    const Itotal = Vs / Req;
-                    const targetNum = parseFloat((Math.pow(Itotal, 2) * R1 * 1000).toFixed(2));
-                    return {
-                        Vs, R1, R2, R3, R4, targetNum,
-                        prompt: `Level 10 (Combination Power): $V_s = ${Vs}\\text{ V}$ into $R_1 = ${R1}\\text{ }\\Omega$ in series with parallel bank ($R_2 = 1.5\\text{ k}\\Omega \\parallel R_3 = 1.5\\text{ k}\\Omega \\parallel R_4 = 1.5\\text{ k}\\Omega$). Calculate power dissipated in $R_1$ ($P_{R1}$) in milliwatts (mW).`,
-                        valBoxes: [{ label: "Vs", value: `${Vs} V` }, { label: "R1", value: `${R1} Ω` }, { label: "Parallel Bank", value: "1.5k || 1.5k || 1.5k" }],
-                        formula: "$$P_{R1}\\text{ (mW)} = \\left( I_{\\text{total}}^2 \\cdot R_1 \\right) \\times 1000$$",
-                        example: "💡 <strong>Worked Example:</strong> If $I_{\\text{total}} = 0.01\\text{ A}$ and $R_1 = 200\\text{ }\\Omega$:<br>• $P = (0.01)^2 \\times 200 = 0.0001 \\times 200 = 0.02\\text{ W}$<br>• Convert to mW: $0.02 \\times 1000 = 20\\text{ mW}$."
-                    };
-                }
-            }
+            { type: 'series', numResistors: 1, targetUnit: 'mA', unitOptions: ['A', 'mA', 'μA'], generate: () => { const Vs = 12; const R1 = Math.floor(Math.random() * 30 + 15) * 10; const targetNum = parseFloat(((Vs / R1) * 1000).toFixed(2)); return { Vs, R1, targetNum, prompt: `Level 1 (Simple Series): Supply voltage $V_s = ${Vs}\text{ V}$ is connected across resistor $R_1 = ${R1}\text{ }\Omega$. Calculate current $I$ in milliamperes.`, valBoxes: [{ label: 'Voltage', value: `${Vs} V` }, { label: 'R1', value: `${R1} Ω` }, { label: 'Find', value: 'Current (I)' }], formula: '$$I\text{ (mA)} = \left( \frac{V_s}{R_1} \right) \times 1000$$', example: '💡 <strong>Worked Example:</strong> If $V_s = 10\text{ V}$ and $R_1 = 500\text{ }\Omega$, then $I = 10/500 = 0.02\text{ A} = 20\text{ mA}$.' }; } },
+            { type: 'series', numResistors: 2, targetUnit: 'kΩ', unitOptions: ['Ω', 'kΩ', 'MΩ'], generate: () => { const Vs = 24; const R1 = Math.floor(Math.random() * 10 + 10) * 100; const R2 = Math.floor(Math.random() * 10 + 5) * 100; const targetNum = parseFloat(((R1 + R2) / 1000).toFixed(2)); return { Vs, R1, R2, targetNum, prompt: `Level 2 (Series Equivalent): Series resistors $R_1 = ${(R1/1000).toFixed(1)}\text{ k}\Omega$ and $R_2 = ${(R2/1000).toFixed(1)}\text{ k}\Omega$ are connected. Find the equivalent resistance in kΩ.`, valBoxes: [{ label: 'Voltage', value: `${Vs} V` }, { label: 'R1', value: `${(R1/1000).toFixed(1)} kΩ` }, { label: 'R2', value: `${(R2/1000).toFixed(1)} kΩ` }], formula: '$$R_{\text{eq}}\text{ (k}\Omega\text{)} = R_1 + R_2$$', example: '💡 <strong>Worked Example:</strong> If $R_1 = 1.5\text{ k}\Omega$ and $R_2 = 3.5\text{ k}\Omega$, then $R_{eq}=5.0\text{ k}\Omega$.' }; } },
+            { type: 'series', numResistors: 2, targetUnit: 'V', unitOptions: ['mV', 'V', 'kV'], generate: () => { const Vs = 12; const R1 = 3300; const R2 = Math.floor(Math.random() * 40 + 40) * 100; const targetNum = parseFloat((Vs * (R2 / (R1 + R2))).toFixed(2)); return { Vs, R1, R2, targetNum, prompt: `Level 3 (Voltage Divider): Supply $V_s = ${Vs}\text{ V}$ across series resistors $R_1 = ${(R1/1000).toFixed(1)}\text{ k}\Omega$ and $R_2 = ${(R2/1000).toFixed(1)}\text{ k}\Omega$. Find $V_{R2}$.`, valBoxes: [{ label: 'Vs', value: `${Vs} V` }, { label: 'R1', value: `${(R1/1000).toFixed(1)} kΩ` }, { label: 'R2', value: `${(R2/1000).toFixed(1)} kΩ` }], formula: '$$V_{R2} = V_s \cdot \left( \frac{R_2}{R_1 + R_2} \right)$$', example: '💡 <strong>Worked Example:</strong> If $V_s = 10\text{ V}, R_1 = 2\text{ k}\Omega, R_2 = 3\text{ k}\Omega$, then $V_{R2} = 10 \times 3/5 = 6\text{ V}$.' }; } },
+            { type: 'parallel3', numResistors: 3, targetUnit: 'Ω', unitOptions: ['Ω', 'kΩ', 'mΩ'], generate: () => { const Vs = 12; const R1 = Math.floor(Math.random() * 3 + 2) * 100; const R2 = Math.floor(Math.random() * 3 + 2) * 100; const R3 = Math.floor(Math.random() * 3 + 2) * 100; const targetNum = parseFloat((1 / ((1 / R1) + (1 / R2) + (1 / R3))).toFixed(2)); return { Vs, R1, R2, R3, targetNum, prompt: `Level 4 (3-Resistor Parallel Network): Three parallel resistors $R_1 = ${R1}\text{ }\Omega$, $R_2 = ${R2}\text{ }\Omega$, and $R_3 = ${R3}\text{ }\Omega$ are connected across $V_s = ${Vs}\text{ V}$. Find the equivalent resistance.`, valBoxes: [{ label: 'R1', value: `${R1} Ω` }, { label: 'R2', value: `${R2} Ω` }, { label: 'R3', value: `${R3} Ω` }], formula: '$$\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}$$', example: '💡 <strong>Worked Example:</strong> For $100\Omega, 200\Omega, 200\Omega$, $R_{eq}=\frac{1}{1/100+1/200+1/200}=50\Omega$.' }; } },
+            { type: 'parallel3', numResistors: 3, targetUnit: 'mA', unitOptions: ['A', 'mA', 'μA'], generate: () => { const Vs = 24; const R1 = 1000; const R2 = Math.floor(Math.random() * 3 + 2) * 1000; const R3 = 4000; const targetNum = parseFloat(((Vs / R2) * 1000).toFixed(2)); return { Vs, R1, R2, R3, targetNum, prompt: `Level 5 (Branch Current in 3-Way Parallel): $V_s = ${Vs}\text{ V}$ is connected across a parallel network. Find the current through $R_2$.`, valBoxes: [{ label: 'Vs', value: `${Vs} V` }, { label: 'Target Branch', value: 'R2' }, { label: 'R2 Value', value: `${(R2/1000).toFixed(1)} kΩ` }], formula: '$$I_{R2}\text{ (mA)} = \left( \frac{V_s}{R_2} \right) \times 1000$$', example: '💡 <strong>Worked Example:</strong> If $V_s = 12\text{ V}$ and $R_2=3000\Omega$, then $I=12/3000=4\text{ mA}$.' }; } },
+            { type: 'parallel3', numResistors: 3, targetUnit: 'mA', unitOptions: ['mA', 'A', 'μA'], generate: () => { const Vs = 12; const R1 = 300; const R2 = 400; const R3 = Math.floor(Math.random() * 4 + 2) * 100; const targetNum = parseFloat((((Vs / R1) + (Vs / R2) + (Vs / R3)) * 1000).toFixed(2)); return { Vs, R1, R2, R3, targetNum, prompt: `Level 6 (Total Parallel Current): $V_s = ${Vs}\text{ V}$ across 3 parallel resistors. Find the total current in mA.`, valBoxes: [{ label: 'R1', value: `${R1} Ω` }, { label: 'R2', value: `${R2} Ω` }, { label: 'R3', value: `${R3} Ω` }], formula: '$$I_{total}\text{ (mA)} = \left( \frac{V_s}{R_1} + \frac{V_s}{R_2} + \frac{V_s}{R_3} \right) \times 1000$$', example: '💡 <strong>Worked Example:</strong> If $V_s = 10\text{ V}$, then $I_{total} = (10/100 + 10/200 + 10/500)\times 1000 = 95\text{ mA}$.' }; } },
+            { type: 'combo', numResistors: 4, targetUnit: 'Ω', unitOptions: ['Ω', 'kΩ', 'mΩ'], generate: () => { const Vs = 12; const R1 = Math.floor(Math.random() * 5 + 5) * 10; const R2 = 300; const R3 = 300; const R4 = 300; const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4)); const targetNum = parseFloat((R1 + Rp).toFixed(2)); return { Vs, R1, R2, R3, R4, targetNum, prompt: `Level 7 (Combination Circuit): $R_1 = ${R1}\Omega$ is in series with a 3-resistor parallel bank. Find the total equivalent resistance in Ω.`, valBoxes: [{ label: 'Vs', value: `${Vs} V` }, { label: 'R1 (Series)', value: `${R1} Ω` }, { label: 'Parallel Bank', value: '300 || 300 || 300 Ω' }], formula: '$$R_{eq} = R_1 + R_p$$', example: '💡 <strong>Worked Example:</strong> First compute $R_p$ for the parallel bank, then add $R_1$.' }; } },
+            { type: 'combo', numResistors: 4, targetUnit: 'mA', unitOptions: ['A', 'mA', 'μA'], generate: () => { const Vs = 24; const R1 = 1000; const R2 = Math.floor(Math.random() * 3 + 2) * 1000; const R3 = 6000; const R4 = 6000; const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4)); const Req = R1 + Rp; const targetNum = parseFloat(((Vs / Req) * 1000).toFixed(2)); return { Vs, R1, R2, R3, R4, targetNum, prompt: `Level 8 (Combination Total Current): $V_s = ${Vs}\text{ V}$ is connected to $R_1$ in series with a parallel bank. Find total current in mA.`, valBoxes: [{ label: 'Vs', value: `${Vs} V` }, { label: 'R1', value: `${(R1/1000).toFixed(1)} kΩ` }, { label: 'Req Parallel', value: 'Calculate 1/Rp' }], formula: '$$I_{total} = \frac{V_s}{R_1 + R_p}$$', example: '💡 <strong>Worked Example:</strong> Compute $R_p$ first, then total series resistance, then divide voltage by total resistance.' }; } },
+            { type: 'combo', numResistors: 4, targetUnit: 'mA', unitOptions: ['A', 'mA', 'μA'], generate: () => { const Vs = 18; const R1 = 1200; const R2 = 3000; const R3 = Math.floor(Math.random() * 3 + 2) * 1000; const R4 = 6000; const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4)); const Req = R1 + Rp; const Itotal = Vs / Req; const Vp = Itotal * Rp; const targetNum = parseFloat(((Vp / R3) * 1000).toFixed(2)); return { Vs, R1, R2, R3, R4, targetNum, prompt: `Level 9 (Combination Branch Split): $V_s = ${Vs}\text{ V}$ enters a series resistor and then a 3-branch parallel bank. Find the current through $R_3$.`, valBoxes: [{ label: 'Vs', value: `${Vs} V` }, { label: 'R1', value: `${(R1/1000).toFixed(1)} kΩ` }, { label: 'R3 Target', value: `${(R3/1000).toFixed(1)} kΩ` }], formula: '$$I_{R3} = \frac{V_p}{R_3}$$', example: '💡 <strong>Worked Example:</strong> Find total current, then voltage across the parallel bank, and finally divide by $R_3$.' }; } },
+            { type: 'combo', numResistors: 4, targetUnit: 'mW', unitOptions: ['mW', 'W', 'μW'], generate: () => { const Vs = 30; const R1 = Math.floor(Math.random() * 4 + 3) * 100; const R2 = 1500; const R3 = 1500; const R4 = 1500; const Rp = 1 / ((1 / R2) + (1 / R3) + (1 / R4)); const Req = R1 + Rp; const Itotal = Vs / Req; const targetNum = parseFloat((Math.pow(Itotal, 2) * R1 * 1000).toFixed(2)); return { Vs, R1, R2, R3, R4, targetNum, prompt: `Level 10 (Combination Power): $V_s = ${Vs}\text{ V}$ into $R_1 = ${R1}\Omega$ in series with a parallel bank. Find the power dissipated by $R_1$ in mW.`, valBoxes: [{ label: 'Vs', value: `${Vs} V` }, { label: 'R1', value: `${R1} Ω` }, { label: 'Parallel Bank', value: '1.5k || 1.5k || 1.5k' }], formula: '$$P_{R1}\text{ (mW)} = \left( I_{total}^2 \cdot R_1 \right) \times 1000$$', example: '💡 <strong>Worked Example:</strong> First compute total current, then use $P = I^2R$ for the series resistor.' }; } }
         ];
 
         function drawResistor(x, y, isVertical, valOhms, labelText) {
             const bands = getResistorBands(valOhms);
             const rot = isVertical ? 'rotate(90)' : '';
-
             return `
                 <g transform="translate(${x}, ${y})">
                     <g transform="${rot}">
                         <rect x="-20" y="-10" width="40" height="20" rx="4" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
                         <rect x="-13" y="-10" width="4" height="20" fill="${bands[0]}"/>
-                        <rect x="-5"  y="-10" width="4" height="20" fill="${bands[1]}"/>
-                        <rect x="3"   y="-10" width="4" height="20" fill="${bands[2]}"/>
-                        <rect x="11"  y="-10" width="3" height="20" fill="${bands[3]}"/>
+                        <rect x="-5" y="-10" width="4" height="20" fill="${bands[1]}"/>
+                        <rect x="3" y="-10" width="4" height="20" fill="${bands[2]}"/>
+                        <rect x="11" y="-10" width="3" height="20" fill="${bands[3]}"/>
                     </g>
-                    <text x="${isVertical ? -28 : 0}" y="${isVertical ? 4 : -16}" 
-                          font-family="sans-serif" font-weight="bold" font-size="12" 
-                          fill="#0f172a" text-anchor="${isVertical ? 'end' : 'middle'}">${labelText}</text>
+                    <text x="${isVertical ? -28 : 0}" y="${isVertical ? 4 : -16}" font-family="sans-serif" font-weight="bold" font-size="12" fill="#0f172a" text-anchor="${isVertical ? 'end' : 'middle'}">${labelText}</text>
                 </g>
             `;
         }
@@ -342,110 +218,60 @@
 
         function renderSchematic(level) {
             const container = document.getElementById('schematicContainer');
+            if (!container) return;
             const vVal = level.Vs;
-
             if (level.type === 'series') {
                 if (level.numResistors === 1) {
-                    container.innerHTML = `
-                        <svg width="300" height="260" viewBox="0 0 320 280">
-                            <path d="M 60 140 L 60 50 L 260 50 L 260 230 L 60 230 L 60 140" 
-                                  fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            ${drawPowerSupply(60, 140, vVal)}
-                            ${drawResistor(260, 140, true, level.R1, 'R1')}
-                        </svg>`;
+                    container.innerHTML = `<svg width="100%" height="260" viewBox="0 0 320 280"><path d="M 60 140 L 60 50 L 260 50 L 260 230 L 60 230 L 60 140" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${drawPowerSupply(60, 140, vVal)}${drawResistor(260, 140, true, level.R1, 'R1')}</svg>`;
                 } else {
-                    container.innerHTML = `
-                        <svg width="300" height="260" viewBox="0 0 320 280">
-                            <path d="M 60 140 L 60 50 L 260 50 L 260 230 L 60 230 L 60 140" 
-                                  fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            ${drawPowerSupply(60, 140, vVal)}
-                            ${drawResistor(260, 85, true, level.R1, 'R1')}
-                            ${drawResistor(260, 195, true, level.R2, 'R2')}
-                        </svg>`;
+                    container.innerHTML = `<svg width="100%" height="260" viewBox="0 0 320 280"><path d="M 60 140 L 60 50 L 260 50 L 260 230 L 60 230 L 60 140" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${drawPowerSupply(60, 140, vVal)}${drawResistor(260, 85, true, level.R1, 'R1')}${drawResistor(260, 195, true, level.R2, 'R2')}</svg>`;
                 }
             } else if (level.type === 'parallel3') {
-                container.innerHTML = `
-                    <svg width="300" height="260" viewBox="0 0 320 280">
-                        <path d="M 50 140 L 50 50 L 290 50 M 50 140 L 50 230 L 290 230
-                                 M 150 50 L 150 230 M 220 50 L 220 230 M 290 50 L 290 230" 
-                              fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="150" cy="50" r="4" fill="#0f172a"/><circle cx="150" cy="230" r="4" fill="#0f172a"/>
-                        <circle cx="220" cy="50" r="4" fill="#0f172a"/><circle cx="220" cy="230" r="4" fill="#0f172a"/>
-                        ${drawPowerSupply(50, 140, vVal)}
-                        ${drawResistor(150, 140, true, level.R1, 'R1')}
-                        ${drawResistor(220, 140, true, level.R2, 'R2')}
-                        ${drawResistor(290, 140, true, level.R3, 'R3')}
-                    </svg>`;
+                container.innerHTML = `<svg width="100%" height="260" viewBox="0 0 320 280"><path d="M 50 140 L 50 50 L 290 50 M 50 140 L 50 230 L 290 230 M 150 50 L 150 230 M 220 50 L 220 230 M 290 50 L 290 230" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="150" cy="50" r="4" fill="#0f172a"/><circle cx="150" cy="230" r="4" fill="#0f172a"/><circle cx="220" cy="50" r="4" fill="#0f172a"/><circle cx="220" cy="230" r="4" fill="#0f172a"/>${drawPowerSupply(50, 140, vVal)}${drawResistor(150, 140, true, level.R1, 'R1')}${drawResistor(220, 140, true, level.R2, 'R2')}${drawResistor(290, 140, true, level.R3, 'R3')}</svg>`;
             } else {
-                container.innerHTML = `
-                    <svg width="300" height="260" viewBox="0 0 320 280">
-                        <path d="M 50 140 L 50 50 L 150 50 M 150 50 L 290 50 M 150 230 L 290 230
-                                 M 150 50 L 150 230 M 220 50 L 220 230 M 290 50 L 290 230 M 50 140 L 50 230 L 150 230" 
-                              fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="150" cy="50" r="4" fill="#0f172a"/><circle cx="150" cy="230" r="4" fill="#0f172a"/>
-                        <circle cx="220" cy="50" r="4" fill="#0f172a"/><circle cx="220" cy="230" r="4" fill="#0f172a"/>
-                        ${drawPowerSupply(50, 140, vVal)}
-                        ${drawResistor(100, 50, false, level.R1, 'R1')}
-                        ${drawResistor(150, 140, true, level.R2, 'R2')}
-                        ${drawResistor(220, 140, true, level.R3, 'R3')}
-                        ${drawResistor(290, 140, true, level.R4, 'R4')}
-                    </svg>`;
+                container.innerHTML = `<svg width="100%" height="260" viewBox="0 0 320 280"><path d="M 50 140 L 50 50 L 150 50 M 150 50 L 290 50 M 150 230 L 290 230 M 150 50 L 150 230 M 220 50 L 220 230 M 290 50 L 290 230 M 50 140 L 50 230 L 150 230" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="150" cy="50" r="4" fill="#0f172a"/><circle cx="150" cy="230" r="4" fill="#0f172a"/><circle cx="220" cy="50" r="4" fill="#0f172a"/><circle cx="220" cy="230" r="4" fill="#0f172a"/>${drawPowerSupply(50, 140, vVal)}${drawResistor(100, 50, false, level.R1, 'R1')}${drawResistor(150, 140, true, level.R2, 'R2')}${drawResistor(220, 140, true, level.R3, 'R3')}${drawResistor(290, 140, true, level.R4, 'R4')}</svg>`;
             }
         }
 
         function renderUnitSelector(options) {
             const container = document.getElementById('unitBoxContainer');
-            container.innerHTML = "";
+            container.innerHTML = '';
             options.forEach((u, idx) => {
                 const label = document.createElement('label');
-                label.className = 'unit-option';
+                label.className = 'unit-option rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800 px-2 py-1 text-xs font-bold';
                 label.innerHTML = `<input type="radio" name="unitPick" value="${u}" ${idx === 0 ? 'checked' : ''}> ${u}`;
                 container.appendChild(label);
             });
         }
 
         function loadLevel() {
-            if (window.score >= LEVEL_TEMPLATES.length) { 
-                alert("🎉 Congratulations! You completed all circuit analysis levels!"); 
-                window.score = 0; 
-            }
-
+            if (window.score >= LEVEL_TEMPLATES.length) { alert('🎉 Congratulations! You completed all circuit analysis levels!'); window.score = 0; }
             window.wrongAttempts = 0;
             const template = LEVEL_TEMPLATES[window.score];
             window.activeState = Object.assign({}, template, template.generate());
-
             renderCurrentState();
         }
 
         function triggerMathJax() {
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise();
-            }
+            if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
         }
 
         function renderCurrentState() {
             const st = window.activeState;
-            document.getElementById('scenarioTitle').innerText = "Level " + (window.score + 1) + " of 10";
+            document.getElementById('scenarioTitle').innerText = 'Level ' + (window.score + 1) + ' of 10';
             document.getElementById('promptText').innerHTML = st.prompt;
-            
             for (let i = 0; i < 3; i++) {
                 const box = st.valBoxes[i];
-                document.getElementById('lbl' + (i + 1)).innerText = box ? box.label : "--";
-                document.getElementById('val' + (i + 1)).innerText = box ? box.value : "--";
+                document.getElementById('lbl' + (i + 1)).innerText = box ? box.label : '--';
+                document.getElementById('val' + (i + 1)).innerText = box ? box.value : '--';
             }
-
-            document.getElementById('inNum').value = "";
+            document.getElementById('inNum').value = '';
             renderUnitSelector(st.unitOptions);
-
-            const fb = document.getElementById('fb1');
-            fb.innerText = "";
-            fb.className = "feedback";
-            fb.style.display = "none";
-
-            document.getElementById('formulaBar').style.display = "none";
-            document.getElementById('hintBox').style.display = "none";
+            const fb = document.getElementById('fb1'); fb.innerText = ''; fb.className = 'feedback mt-4 hidden rounded-xl px-3 py-2 text-sm font-semibold'; fb.style.display = 'none';
+            document.getElementById('formulaBar').style.display = 'none';
+            document.getElementById('hintBox').style.display = 'none';
             document.getElementById('scoreDisplay').innerText = `Progress: ${window.score}/${LEVEL_TEMPLATES.length}`;
-
+            document.getElementById('sidebarProgress').innerText = `${window.score}/${LEVEL_TEMPLATES.length}`;
             renderSchematic(st);
             triggerMathJax();
         }
@@ -453,65 +279,50 @@
         window.checkCalculation = function() {
             const numVal = parseFloat(document.getElementById('inNum').value);
             const selectedRadio = document.querySelector('input[name="unitPick"]:checked');
-            const unitVal = selectedRadio ? selectedRadio.value : "";
+            const unitVal = selectedRadio ? selectedRadio.value : '';
             const fb = document.getElementById('fb1');
-
-            if (isNaN(numVal)) {
-                fb.innerText = "⚠️ Please enter a valid numerical answer.";
-                fb.className = "feedback incorrect";
-                return;
-            }
-
+            if (isNaN(numVal)) { fb.innerText = '⚠️ Please enter a valid numerical answer.'; fb.className = 'feedback mt-4 rounded-xl px-3 py-2 text-sm font-semibold incorrect'; fb.style.display = 'block'; return; }
             const targetNum = window.activeState.targetNum;
             const targetUnit = window.activeState.targetUnit;
-
             const isNumCorrect = Math.abs(numVal - targetNum) / targetNum < 0.05;
             const isUnitCorrect = unitVal === targetUnit;
-
             if (isNumCorrect && isUnitCorrect) {
                 fb.innerText = `✅ Correct (${numVal} ${unitVal})! Moving to next level...`;
-                fb.className = "feedback correct";
-                window.score++;
-                localStorage.setItem('score_circuits_v11', window.score);
-                setTimeout(loadLevel, 1800);
+                fb.className = 'feedback mt-4 rounded-xl px-3 py-2 text-sm font-semibold correct';
+                fb.style.display = 'block';
+                window.score++; localStorage.setItem('score_circuits_v11', window.score); setTimeout(loadLevel, 1800);
             } else {
                 window.wrongAttempts++;
-
+                document.getElementById('sidebarWrong').innerText = window.wrongAttempts;
                 if (window.wrongAttempts === 1) {
-                    fb.innerText = "❌ Incorrect. Formula unlocked below! Check your calculation.";
-                    fb.className = "feedback incorrect";
-                    
+                    fb.innerText = '❌ Incorrect. Formula unlocked below! Check your calculation.';
+                    fb.className = 'feedback mt-4 rounded-xl px-3 py-2 text-sm font-semibold incorrect';
+                    fb.style.display = 'block';
                     document.getElementById('formulaBar').innerHTML = window.activeState.formula;
-                    document.getElementById('formulaBar').style.display = "block";
+                    document.getElementById('formulaBar').style.display = 'block';
                     triggerMathJax();
                 } else {
-                    fb.innerText = "❌ Incorrect again. Here is a worked example! The problem values have been refreshed below with new numbers for you to try.";
-                    fb.className = "feedback incorrect";
-
+                    fb.innerText = '❌ Incorrect again. Here is a worked example!';
+                    fb.className = 'feedback mt-4 rounded-xl px-3 py-2 text-sm font-semibold incorrect';
+                    fb.style.display = 'block';
                     document.getElementById('formulaBar').innerHTML = window.activeState.formula;
-                    document.getElementById('formulaBar').style.display = "block";
-
+                    document.getElementById('formulaBar').style.display = 'block';
                     document.getElementById('hintBox').innerHTML = window.activeState.example;
-                    document.getElementById('hintBox').style.display = "block";
-
+                    document.getElementById('hintBox').style.display = 'block';
                     const template = LEVEL_TEMPLATES[window.score];
                     window.activeState = Object.assign({}, template, template.generate());
-
                     setTimeout(() => {
                         document.getElementById('promptText').innerHTML = window.activeState.prompt;
-                        for (let i = 0; i < 3; i++) {
-                            const box = window.activeState.valBoxes[i];
-                            document.getElementById('lbl' + (i + 1)).innerText = box ? box.label : "--";
-                            document.getElementById('val' + (i + 1)).innerText = box ? box.value : "--";
-                        }
+                        for (let i = 0; i < 3; i++) { const box = window.activeState.valBoxes[i]; document.getElementById('lbl' + (i + 1)).innerText = box ? box.label : '--'; document.getElementById('val' + (i + 1)).innerText = box ? box.value : '--'; }
                         renderSchematic(window.activeState);
-                        document.getElementById('inNum').value = "";
+                        document.getElementById('inNum').value = '';
                         triggerMathJax();
                     }, 500);
                 }
             }
         };
 
+        applyTheme();
         window.onload = loadLevel;
     </script>
 </body>
