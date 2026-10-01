@@ -63,6 +63,14 @@ body .text-blue-600,body .text-blue-700,body .dark\:text-blue-400,body .dark\:te
 body .bg-blue-50,body .bg-amber-50{background:var(--c-panel)!important}
 body .border-blue-200,body .border-amber-200{border-color:var(--c-border)!important}
 @media(max-width:900px){body>div.min-h-screen>main>div.grid{grid-template-columns:1fr!important}}
+
+/* Final POE circuit normalization: remove remaining legacy blue interaction styling. */
+html.dark .hint-box{background:var(--c-panel)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
+html.dark .lvl-btn.active{box-shadow:0 0 0 2px rgba(230,230,230,.18)!important}
+.lvl-btn.active{box-shadow:0 0 0 1px var(--c-border)!important}
+body .text-blue-500,body .text-blue-600,body .text-blue-700,body .text-blue-800,body .text-blue-900,body .dark\\:text-blue-200,body .dark\\:text-blue-300,body .dark\\:text-blue-400{color:var(--c-text)!important}
+body [class*="bg-blue-"]{background:var(--c-panel)!important}
+body [class*="border-blue-"]{border-color:var(--c-border)!important}
 </style><style id="poe-dark-mode-final">
 /* Dark mode final normalization: override fixed light-theme legacy declarations. */
 html.dark .container,html.dark .card,html.dark .panel,html.dark .work-area{background:var(--c-surface)!important;color:var(--c-text)!important;border-color:var(--c-border)!important}
