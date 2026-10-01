@@ -34,7 +34,7 @@
 <main class="thermo-main">
 <header class="topbar"><div><div class="eyebrow">Principles of Engineering</div><div class="title">Thermodynamics</div></div><div class="toolbar">
 <button class="btn icon-btn" id="nextBtn"><i data-lucide="shuffle"></i>New problem</button>
-<button class="btn icon-btn" id="reportBtn"><i data-lucide="clipboard-list"></i>Report</button>
+<button class="btn icon-btn" id="learnBtn"><i data-lucide="graduation-cap"></i>Learn Mode</button><button class="btn icon-btn" id="reportBtn"><i data-lucide="clipboard-list"></i>Report</button>
 <button class="btn icon-btn" id="calcBtn"><i data-lucide="calculator"></i>Calculator</button>
 </div></header>
 <section class="workspace">
@@ -47,7 +47,7 @@
 </section>
 </main>
 </div>
-<div class="report" id="report"><div class="report-head"><strong>Practice report</strong><button class="btn icon-btn" id="closeReport"><i data-lucide="x"></i></button></div><div class="report-body">
+<div class="report" id="learn" style="right:auto;left:calc(var(--sidebar) + 24px);"><div class="report-head"><strong>Learn Mode</strong><button class="btn icon-btn" id="closeLearn"><i data-lucide="x"></i></button></div><div class="report-body"><p><b>1. Identify</b><br><small>Read the scenario and identify the quantity the question asks for.</small></p><p><b>2. Convert</b><br><small>Put every value into the units required by the displayed formula before calculating.</small></p><p><b>3. Substitute</b><br><small>Write the formula, substitute the given values, then calculate with enough precision.</small></p><p><b>4. Check</b><br><small>Check the unit, sign, magnitude, and whether your result answers the exact quantity requested.</small></p></div></div><div class="report" id="report"><div class="report-head"><strong>Practice report</strong><button class="btn icon-btn" id="closeReport"><i data-lucide="x"></i></button></div><div class="report-body">
 <div class="stat-grid"><div class="stat"><small>Answered</small><br><b id="attempted">0</b></div><div class="stat"><small>Correct</small><br><b id="correct">0</b></div><div class="stat"><small>Accuracy</small><br><b id="accuracy">0%</b></div></div>
 <p class="eyebrow" style="margin-top:18px">Attempts in this session</p><div id="attemptList"></div>
 </div></div>
@@ -68,9 +68,9 @@ function next(){load(state.mode==="infinite"?(Math.random()<.5?"core":"part2"):s
 function renderReport(){
  $("#attempted").textContent=state.attempted;$("#correct").textContent=state.correct;
  $("#accuracy").textContent=state.attempted?Math.round(state.correct/state.attempted*100)+"%":"0%";
- $("#attemptList").innerHTML=state.items.length?state.items.slice().reverse().map((x,i)=>'<div class="attempt"><b>#'+(state.items.length-i)+"</b> "+x.topic+"<br><small>"+x.status+" • "+x.answer+"</small></div>").join(""):'<small>No submitted answers recorded yet. Use the report after completing problems.</small>';
+ $("#attemptList").innerHTML=state.items.length?state.items.slice().reverse().map((x,i)=>'<div class="attempt"><b>#'+(state.items.length-i)+"</b> "+x.topic+"<br><small>"+x.status+" • submitted: "+x.answer+" • correct: "+(x.target??"—")+" "+(x.unit||"")+"</small></div>").join(""):'<small>No submitted answers recorded yet. Use the report after completing problems.</small>';
 }
-$("#nextBtn").onclick=next;
+$("#learnBtn").onclick=()=>$("#learn").classList.add("open");$("#closeLearn").onclick=()=>$("#learn").classList.remove("open");$("#nextBtn").onclick=next;
 $("#reportBtn").onclick=()=>{$("#report").classList.add("open");renderReport()};
 $("#closeReport").onclick=()=>$("#report").classList.remove("open");
 $("#calcBtn").onclick=()=>{window.open("https://www.desmos.com/scientific","_blank","noopener")};
