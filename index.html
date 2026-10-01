@@ -24,10 +24,10 @@
 <a class="nav-link" href="Thermodynamics.html"><i data-lucide="thermometer"></i><span>Thermodynamics</span></a>
 <a class="nav-link" href="Circuits.html"><i data-lucide="cpu"></i><span>Circuits</span></a>
 </nav>
-<div class="sidebar-footer"><button class="btn icon-btn" id="themeBtn"><i data-lucide="moon"></i><span>Theme</span></button></div>
+<div class="sidebar-footer"><button class="btn icon-btn" id="themeBtn" type="button" aria-label="Toggle light and dark theme"><i data-lucide="moon"></i><span>Theme</span></button></div>
 </aside>
-<main class="dashboard">
-<div class="topbar"><div><div class="eyebrow">Principles of Engineering</div><div class="title">Engineering practice</div></div><div class="toolbar"><button class="btn icon-btn" id="nameBtn"><i data-lucide="user-round"></i><span id="nameLabel">Student</span></button></div></div>
+<a class="skip-link" href="#main-content">Skip to content</a><main class="dashboard" id="main-content">
+<div class="topbar"><div><div class="eyebrow">Principles of Engineering</div><div class="title">Engineering practice</div></div><div class="toolbar"><button class="btn icon-btn" id="nameBtn" type="button" aria-haspopup="dialog"><i data-lucide="user-round"></i><span id="nameLabel">Student</span></button></div></div>
 <section class="hero"><div class="eyebrow">Workspace</div><h1>Practice without the clutter.</h1><p>Use the original POE problem sets, randomized generators, formulas, references, schematics, and calculators through a cleaner workspace. Practice is unlimited; your score represents performance, not completion.</p></section>
 <div class="section-title">Subjects</div>
 <section class="quick-grid">
@@ -36,14 +36,14 @@
 </section>
 <div class="section-title">Tools</div>
 <section class="tools-grid">
-<button class="tool" id="learnBtn"><i data-lucide="graduation-cap"></i><strong> Learn Mode</strong><br><small>Guided solving steps and formulas.</small></button>
-<button class="tool" id="calcBtn"><i data-lucide="calculator"></i><strong> Desmos</strong><br><small>Open the scientific calculator.</small></button>
-<button class="tool" id="copyBtn"><i data-lucide="clipboard-copy"></i><strong> Copy report</strong><br><small>Copy current performance summary.</small></button>
+<button class="tool" id="learnBtn" type="button"><i data-lucide="graduation-cap"></i><strong> Learn Mode</strong><br><small>Guided solving steps and formulas.</small></button>
+<button class="tool" id="calcBtn" type="button"><i data-lucide="calculator"></i><strong> Desmos</strong><br><small>Open the scientific calculator.</small></button>
+<button class="tool" id="copyBtn" type="button"><i data-lucide="clipboard-copy"></i><strong> Copy report</strong><br><small>Copy current performance summary.</small></button>
 </section>
 <div class="section-title">Account</div>
-<section class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><strong id="accountName">Student</strong><br><span class="muted">Stored locally on this device.</span></div><button class="btn icon-btn" id="resetBtn"><i data-lucide="rotate-ccw"></i>Reset performance</button></div></section>
+<section class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><strong id="accountName">Student</strong><br><span class="muted">Stored locally on this device.</span></div><button class="btn icon-btn" id="resetBtn" type="button"><i data-lucide="rotate-ccw"></i>Reset performance</button></div></section>
 </main></div>
-<div class="modal" id="modal"><div class="modal-card"><div class="modal-head"><strong id="modalTitle">Student name</strong><button class="btn icon-btn" id="closeModal"><i data-lucide="x"></i></button></div><input class="field" id="nameInput" placeholder="Enter a display name"><div style="display:flex;justify-content:flex-end"><button class="btn btn-primary" id="saveName">Save</button></div></div></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-head"><strong id="modalTitle">Student name</strong><button class="btn icon-btn" id="closeModal" type="button" aria-label="Close student name dialog"><i data-lucide="x"></i></button></div><input class="field" id="nameInput" placeholder="Enter a display name"><div style="display:flex;justify-content:flex-end"><button class="btn btn-primary" id="saveName">Save</button></div></div></div>
 <div class="toast" id="toast"></div>
 <script>
 const $=s=>document.querySelector(s);
