@@ -371,6 +371,19 @@ window.poeNotice=function(message){
 </script></body>
 </html>
 
+<style id="poe-final-neutral-ui">
+/* Final visual normalization: keep legacy engine content, but remove old blue/gradient presentation. */
+body svg path[stroke="#2563eb"], body svg path[stroke="#3b82f6"], body svg line[stroke="#2563eb"], body svg line[stroke="#3b82f6"]{stroke:var(--c-accent)!important}
+body svg text[fill="#38bdf8"]{fill:var(--c-text)!important}
+body svg rect[fill="#0f172a"]{fill:var(--c-panel)!important}
+body svg circle[fill="#0f172a"]{fill:var(--c-text)!important}
+body .bg-gradient-to-r,body .bg-gradient-to-br{background:var(--c-panel)!important}
+body .from-blue-600,body .to-violet-600,body .from-blue-500,body .to-cyan-500{background-image:none!important}
+body .text-blue-600,body .text-blue-700,body .dark\:text-blue-400,body .dark\:text-blue-200{color:var(--c-text)!important}
+body .border-blue-200,body .border-blue-700{border-color:var(--c-border)!important}
+body .bg-blue-50,body .bg-blue-900\/30,body .bg-amber-50{background:var(--c-panel)!important}
+body .border-amber-200,body .border-amber-700{border-color:var(--c-border)!important}
+</style>
 <style id="poe-circuit-math">
 /* Circuit math is rendered by MathJax, not shown as raw TeX. */
 .prompt-text{font-size:16px!important;line-height:1.7!important}
