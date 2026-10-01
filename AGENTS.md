@@ -39,11 +39,11 @@ Use the existing CSS variables and components where possible instead of creating
 ## Thermodynamics architecture
 
 - `Thermodynamics.html` is the canonical Thermodynamics entry point.
-- `ThermodynamicsPt2.html` is a compatibility entry point that routes to the canonical page's Part 2 mode.
+- `ThermodynamicsPt2.html` is a compatibility entry point that redirects to the canonical unified Thermodynamics page; it does not expose a separate Part 2 UI.
 - `ThermodynamicsCore.html` preserves the original core problem engine.
 - `ThermodynamicsPart2Engine.html` preserves the original Part 2 problem engine.
 - Do not delete either engine unless all of its problem generators, formulas, references, hints, examples, and other functionality have been migrated and verified.
-- Practice is intended to be unlimited/randomized. A score represents performance, not completion.
+- Practice is intended to be unlimited/randomized. Thermodynamics uses one unified user-facing practice flow; a score represents performance, not completion.
 - Reports should expose useful attempt information such as submitted answer, expected answer, topic, correctness, and attempt count.
 - Preserve MathJax, Desmos, formulas, references, schematics, hints, worked examples, and unit checking.
 
