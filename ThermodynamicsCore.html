@@ -823,5 +823,21 @@ iframe{filter:none!important;background:#111!important}
 
         window.onload = () => generate(false);
     </script>
-</body>
+<script>
+(function(){
+  function hook(){
+    if(typeof window.check1!=="function"||window.__poeHooked)return;
+    window.__poeHooked=true;
+    const original=window.check1;
+    window.check1=function(){
+      const answer=document.getElementById("in1")?.value??"";
+      const topic=document.getElementById("scenarioTitle")?.textContent?.trim()||"Thermodynamics";
+      original();
+      const correct=!!(window.p && typeof window.p.target==="number" && Number.isFinite(parseFloat(answer)) && Math.abs(parseFloat(answer)-window.p.target)<=Math.max(Math.abs(window.p.target)*0.02,0.02));
+      parent.postMessage({type:"poe-attempt",topic,answer:answer||"—",target:window.p?.target,unit:window.p?.unitHint||"",correct,attempts:window.incorrectAttempts||0},"*");
+    };
+  }
+  const t=setInterval(()=>{hook();if(window.__poeHooked)clearInterval(t)},100);
+})();
+</script></body>
 </html>
