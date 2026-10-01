@@ -3,149 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principles of Engineering - Practice</title>
+    <title>POE Academy - Master Engineering Principles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899'
+                    }
+                }
+            }
+        };
+    </script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 40px auto; padding: 0 20px; background-color: #f4f7f6; }
-        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .profile-section { background: #2c3e50; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        input { padding: 10px; border-radius: 4px; border: 1px solid #ddd; margin-right: 10px; width: 200px; }
-        button { padding: 10px 15px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .btn-reset { background: #e74c3c; font-size: 0.8em; margin-top: 20px; width: 100%; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
-        .btn-reset:hover { background: #c0392b; }
-        .btn-copy { background: #27ae60; font-size: 0.85em; margin-top: 10px; width: 100%; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
-        .btn-copy:hover { background: #1e8449; }
-        .link-card { display: block; background: #fff; border: 1px solid #ddd; margin-bottom: 15px; padding: 20px; border-radius: 6px; text-decoration: none; color: #2c3e50; transition: transform 0.2s; position: relative; }
-        .link-card:hover { transform: translateY(-2px); border-color: #3498db; background-color: #f0f7ff; }
-        .score-badge { float: right; background: #27ae60; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; }
-        .placeholder-card { border: 2px dashed #ccc; background: #fafafa; opacity: 0.7; }
-        .placeholder-card:hover { transform: none; border-color: #ccc; cursor: default; }
-        .summary-box { margin-top: 15px; }
-        .summary-box textarea { width: 100%; box-sizing: border-box; height: 110px; font-family: monospace; font-size: 0.85em; border-radius: 4px; border: 1px solid #ddd; padding: 10px; resize: vertical; }
-        .hint { font-size: 0.8em; color: #6c757d; margin-top: 4px; }
+        body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .active-nav { background: rgba(59,130,246,.12); color: #2563eb; }
+        .dark .active-nav { background: rgba(59,130,246,.18); color: #93c5fd; }
+        .glass { background: rgba(255,255,255,.7); backdrop-filter: blur(10px); }
+        .dark .glass { background: rgba(15,23,42,.75); }
     </style>
 </head>
-<body>
-    <div class="profile-section" id="loginArea">
-        <div>
-            <h3 style="margin:0;">Student Access</h3>
-            <div id="loginForm" style="margin-top:10px;">
-                <input type="text" id="studentNameInput" placeholder="Enter Full Name">
-                <button onclick="saveName()">Begin Session</button>
+<body class="min-h-screen bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+    <div class="min-h-screen flex">
+        <aside class="w-72 bg-white/90 dark:bg-slate-900/90 border-r border-slate-200 dark:border-slate-700 backdrop-blur-sm sticky top-0 h-screen shrink-0">
+            <div class="p-6">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-2xl shadow-lg">⚡</div>
+                    <div>
+                        <h1 class="text-2xl font-black tracking-tight">POE</h1>
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Academy</p>
+                    </div>
+                </div>
+
+                <div class="mb-8 rounded-2xl bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-700 p-4 border border-slate-200 dark:border-slate-700">
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-3">Progress</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-700 dark:text-slate-200">Thermodynamics</span>
+                            <span id="side-thermo" class="font-bold text-orange-600 dark:text-orange-400">0/7</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-700 dark:text-slate-200">Circuits</span>
+                            <span id="side-circuits" class="font-bold text-blue-600 dark:text-blue-400">0/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="space-y-2">
+                    <button onclick="showPage('dashboard')" class="nav-btn active-nav w-full text-left rounded-xl px-4 py-3 font-medium transition">📊 Dashboard</button>
+                    <button onclick="showPage('learn')" class="nav-btn w-full text-left rounded-xl px-4 py-3 font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 transition">🎓 Learn Mode</button>
+                    <button onclick="showPage('practice')" class="nav-btn w-full text-left rounded-xl px-4 py-3 font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 transition">🚀 Practice</button>
+                    <button onclick="showPage('progress')" class="nav-btn w-full text-left rounded-xl px-4 py-3 font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 transition">📈 Progress</button>
+                </nav>
+
+                <div class="mt-10 pt-6 border-t border-slate-200 dark:border-slate-700">
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-3">Workspace</p>
+                    <button onclick="toggleTheme()" class="w-full rounded-xl px-4 py-3 text-left text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 transition flex items-center justify-between">
+                        <span id="themeButtonText">🌙 Dark mode</span>
+                        <span id="themeButtonIcon">◐</span>
+                    </button>
+                    <button onclick="resetProgress()" class="mt-2 w-full rounded-xl px-4 py-3 text-left text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-slate-800/80 transition">🔄 Reset all</button>
+                </div>
             </div>
-        </div>
-    </div>
+        </aside>
 
-    <div class="container">
-        <h1>POE Course Modules</h1>
-        <div id="moduleList"></div>
+        <main class="flex-1 p-8">
+            <header class="mb-8 flex items-center justify-between">
+                <div>
+                    <p class="text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">POE dashboard</p>
+                    <h2 id="pageTitle" class="text-3xl font-black tracking-tight">Welcome back</h2>
+                </div>
+                <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 shadow-sm text-right">
+                    <p id="studentName" class="font-bold text-slate-800 dark:text-slate-100">Guest</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Engineering student</p>
+                </div>
+            </header>
 
-        <button class="btn-reset" onclick="resetAll()">Reset All Progress & Scores</button>
-        <button class="btn-copy" onclick="copySummary()">Copy My Scores (to turn in)</button>
-        <div class="summary-box" id="summaryBox" style="display:none;">
-            <textarea id="summaryText" readonly></textarea>
-            <div class="hint">Copied to clipboard if your browser allows it — paste this into an email, Google Form, or LMS submission for your teacher.</div>
-        </div>
+            <section id="page-dashboard" class="page-panel">
+                <div id="onboarding" class="mb-8 rounded-3xl bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600 p-8 shadow-xl text-white">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                        <div class="max-w-2xl">
+                            <p class="text-sm uppercase tracking-[0.25em] text-blue-100">Start here</p>
+                            <h3 class="mt-2 text-3xl font-black">Learn faster. Practice smarter.</h3>
+                            <p class="mt-3 text-blue-50">POE Academy turns engineering practice into a guided, motivating flow with quick navigation, clear feedback, and modern check-ins.</p>
+                        </div>
+                        <div class="flex gap-3 w-full max-w-xl">
+                            <input id="nameInput" type="text" placeholder="Enter your full name" class="flex-1 rounded-xl border border-white/20 bg-white/10 text-white placeholder-blue-100 focus:outline-none focus:ring-2 focus:ring-white/70 px-4 py-3">
+                            <button onclick="startSession()" class="rounded-xl bg-white text-blue-700 font-bold px-5 py-3 hover:shadow-lg transition">Begin</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mainContent" class="hidden">
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <a href="Thermodynamics.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg hover:-translate-y-1 transition">
+                            <div class="h-32 bg-gradient-to-br from-orange-400 via-amber-500 to-red-500 p-6 flex items-center justify-between">
+                                <span class="text-5xl">🔥</span>
+                                <span class="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">7 levels</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold">Thermodynamics</h3>
+                                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Heat transfer, conduction, energy, and equilibrium.</p>
+                                <div class="mt-5 flex items-center justify-between">
+                                    <span class="text-xs uppercase tracking-[0.2em] text-slate-500">mastery</span>
+                                    <span id="card-thermo" class="rounded-full bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-200 px-3 py-1 font-bold">0/7</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="Circuits.html" class="group relative overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg hover:-translate-y-1 transition">
+                            <div class="h-32 bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-6 flex items-center justify-between">
+                                <span class="text-5xl">⚡</span>
+                                <span class="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">10 levels</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold">Circuits</h3>
+                                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Series, parallel, and combo circuits with guided practice.</p>
+                                <div class="mt-5 flex items-center justify-between">
+                                    <span class="text-xs uppercase tracking-[0.2em] text-slate-500">mastery</span>
+                                    <span id="card-circuits" class="rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 px-3 py-1 font-bold">0/10</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                            <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Total mastery</p>
+                            <div class="mt-4 flex items-end gap-3">
+                                <span id="totalMastery" class="text-5xl font-black text-blue-600 dark:text-blue-400">0</span>
+                                <span class="text-sm text-slate-500">/17</span>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                            <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Current streak</p>
+                            <div class="mt-4 flex items-end gap-3">
+                                <span id="streak" class="text-5xl font-black text-violet-600 dark:text-violet-400">0</span>
+                                <span class="text-sm text-slate-500">days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-learn" class="page-panel hidden">
+                <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg p-8">
+                    <h3 class="text-3xl font-black mb-4">Learn mode</h3>
+                    <p class="text-slate-600 dark:text-slate-300 mb-6">A quick walk-through for each topic, with problem solving steps and worked examples.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <button onclick="launchLearnMode('thermodynamics')" class="rounded-2xl bg-gradient-to-br from-orange-50 to-red-50 dark:from-slate-800 dark:to-slate-700 p-6 text-left border border-orange-200 dark:border-orange-700">
+                            <div class="text-4xl mb-3">🔥</div>
+                            <h4 class="text-xl font-bold">Thermodynamics</h4>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Check the formula, convert units, and solve step by step.</p>
+                        </button>
+                        <button onclick="launchLearnMode('circuits')" class="rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 p-6 text-left border border-blue-200 dark:border-blue-700">
+                            <div class="text-4xl mb-3">⚡</div>
+                            <h4 class="text-xl font-bold">Circuits</h4>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Use equivalent resistance and voltage division before choosing your answer.</p>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-practice" class="page-panel hidden">
+                <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg p-8">
+                    <h3 class="text-3xl font-black mb-4">Practice mode</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <a href="Thermodynamics.html" class="rounded-2xl bg-gradient-to-br from-orange-50 to-red-50 dark:from-slate-800 dark:to-slate-700 p-6 border border-orange-200 dark:border-orange-700">
+                            <div class="text-4xl mb-3">🔥</div>
+                            <h4 class="text-xl font-bold">Thermo drills</h4>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Jump straight into level-based practice.</p>
+                        </a>
+                        <a href="Circuits.html" class="rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 p-6 border border-blue-200 dark:border-blue-700">
+                            <div class="text-4xl mb-3">⚡</div>
+                            <h4 class="text-xl font-bold">Circuit drills</h4>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Practice mixed series and parallel problem solving.</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-progress" class="page-panel hidden">
+                <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg p-8">
+                    <h3 class="text-3xl font-black mb-6">Progress tracker</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex justify-between mb-2"><span>Thermodynamics</span><span id="prog-thermo" class="font-bold">0/7</span></div>
+                            <div class="h-3 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden"><div id="thermoBar" class="h-full rounded-full bg-gradient-to-r from-orange-500 to-red-500" style="width:0%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2"><span>Circuits</span><span id="prog-circuits" class="font-bold">0/10</span></div>
+                            <div class="h-3 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden"><div id="circuitsBar" class="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-500" style="width:0%"></div></div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button onclick="copySummary()" class="rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 text-white font-bold px-5 py-3 shadow-lg hover:shadow-xl transition">Export scores</button>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script>
-        // ---- Add new modules here as the year goes on ----
-        // id:    used to build the localStorage key "score_<id>" (keep it short, no spaces)
-        // title: shown on the card
-        // desc:  one-line description
-        // href:  the module's HTML file
-        // max:   number of levels/mastery points the module awards (shown as Mastery: x/max)
-        const MODULES = [
-            {
-                id: "thermo",
-                title: "Thermodynamics: Heat Transfer & Conduction",
-                desc: "Apply Q = mcΔT and the conduction equation to solve heat transfer problems.",
-                href: "Thermodynamics.html",
-                max: 7
-            },
-            {
-                id: "circuits",
-                title: "Electrical Circuits: Ohm's & Kirchhoff's Laws",
-                desc: "Analyze series, parallel, and combination circuits using an interactive multimeter.",
-                href: "Circuits.html",
-                max: 10
-            }
-            // { id: "nextmodule", title: "...", desc: "...", href: "NextModule.html", max: 10 },
-        ];
-
-        function scoreKey(id) { return "score_" + id; }
-
-        function renderModules() {
-            const list = document.getElementById('moduleList');
-            list.innerHTML = "";
-            MODULES.forEach(m => {
-                const score = localStorage.getItem(scoreKey(m.id)) || '0';
-                const card = document.createElement('a');
-                card.href = m.href;
-                card.className = "link-card";
-                card.innerHTML = `
-                    <span class="score-badge">Mastery: ${score}/${m.max}</span>
-                    <h3>${m.title}</h3>
-                    <p>${m.desc}</p>
-                `;
-                list.appendChild(card);
+        function showPage(page) {
+            document.querySelectorAll('.page-panel').forEach(el => el.classList.add('hidden'));
+            document.getElementById('page-' + page).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active-nav');
+                btn.classList.remove('text-blue-600','dark:text-blue-400');
+                btn.classList.add('text-slate-700','dark:text-slate-200');
             });
-
-            const placeholder = document.createElement('div');
-            placeholder.className = "link-card placeholder-card";
-            placeholder.innerHTML = `
-                <span class="score-badge" style="background:#95a5a6;">Locked</span>
-                <h3>Future Module</h3>
-                <p>Coming soon: add your next module to the MODULES list in this page's code.</p>
-            `;
-            list.appendChild(placeholder);
-        }
-
-        function saveName() {
-            const name = document.getElementById('studentNameInput').value;
-            if (name) { localStorage.setItem('studentName', name); location.reload(); }
-        }
-
-        function resetAll() {
-            if (confirm("Clear all scores? This cannot be undone.")) {
-                MODULES.forEach(m => localStorage.removeItem(scoreKey(m.id)));
-                location.reload();
+            const active = event.currentTarget;
+            if (active) {
+                active.classList.add('active-nav');
+                active.classList.remove('text-slate-700','dark:text-slate-200');
             }
         }
 
-        function buildSummaryText() {
-            const name = localStorage.getItem('studentName') || "(name not entered)";
-            const lines = [`POE Practice Scores - ${name}`, `Date: ${new Date().toLocaleDateString()}`, ""];
-            MODULES.forEach(m => {
-                const score = localStorage.getItem(scoreKey(m.id)) || '0';
-                lines.push(`${m.title}: ${score}/${m.max}`);
-            });
-            return lines.join("\n");
+        function toggleTheme() {
+            const root = document.documentElement;
+            const isDark = root.classList.toggle('dark');
+            localStorage.setItem('poeTheme', isDark ? 'dark' : 'light');
+            const text = document.getElementById('themeButtonText');
+            text.textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
+        }
+
+        function updateTheme() {
+            const saved = localStorage.getItem('poeTheme') || 'light';
+            const isDark = saved === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+            document.getElementById('themeButtonText').textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
+        }
+
+        function startSession() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('Please enter your full name to begin.');
+                return;
+            }
+            localStorage.setItem('studentName', name);
+            document.getElementById('studentName').textContent = name;
+            document.getElementById('onboarding').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const thermo = parseInt(localStorage.getItem('score_thermo')) || 0;
+            const circuits = parseInt(localStorage.getItem('score_circuits_v11')) || 0;
+            document.getElementById('side-thermo').textContent = `${thermo}/7`;
+            document.getElementById('side-circuits').textContent = `${circuits}/10`;
+            document.getElementById('card-thermo').textContent = `${thermo}/7`;
+            document.getElementById('card-circuits').textContent = `${circuits}/10`;
+            document.getElementById('prog-thermo').textContent = `${thermo}/7`;
+            document.getElementById('prog-circuits').textContent = `${circuits}/10`;
+            document.getElementById('thermoBar').style.width = `${(thermo / 7) * 100}%`;
+            document.getElementById('circuitsBar').style.width = `${(circuits / 10) * 100}%`;
+            document.getElementById('totalMastery').textContent = thermo + circuits;
+            document.getElementById('streak').textContent = Math.max(0, Math.min(7, Math.round((thermo + circuits) / 3)));
+        }
+
+        function resetProgress() {
+            if (confirm('Reset all progress?')) {
+                localStorage.removeItem('score_thermo');
+                localStorage.removeItem('score_circuits_v11');
+                localStorage.removeItem('level_history_thermo');
+                updateProgress();
+            }
+        }
+
+        function launchLearnMode(topic) {
+            const map = {
+                thermodynamics: 'Use the formula card, convert units first, then plug values into the equation and check the units before submitting.',
+                circuits: 'Start with equivalent resistance, then use Ohm\'s law and voltage division. Always check the correct branch before answering.'
+            };
+            alert(map[topic] || 'Learn mode ready.');
         }
 
         function copySummary() {
-            const text = buildSummaryText();
-            const box = document.getElementById('summaryBox');
-            const area = document.getElementById('summaryText');
-            area.value = text;
-            box.style.display = "block";
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(text).catch(() => {});
-            }
-            area.focus();
-            area.select();
+            const name = localStorage.getItem('studentName') || 'Student';
+            const thermo = localStorage.getItem('score_thermo') || '0';
+            const circuits = localStorage.getItem('score_circuits_v11') || '0';
+            const summary = `POE Academy\nStudent: ${name}\nThermodynamics: ${thermo}/7\nCircuits: ${circuits}/10\nTotal: ${parseInt(thermo) + parseInt(circuits)}/17`;
+            navigator.clipboard.writeText(summary).then(() => alert('Scores copied to clipboard.'));
         }
 
-        window.onload = function() {
-            renderModules();
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTheme();
             const savedName = localStorage.getItem('studentName');
             if (savedName) {
-                document.getElementById('loginArea').innerHTML = `
-                    <h3 style="margin:0;">Welcome, ${savedName}</h3>
-                    <button onclick="localStorage.removeItem('studentName'); location.reload();"
-                    style="background:transparent; border:1px solid white; font-size:0.8em; cursor:pointer;">Sign Out</button>`;
+                document.getElementById('studentName').textContent = savedName;
+                document.getElementById('onboarding').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
             }
-        };
+            updateProgress();
+        });
     </script>
 </body>
 </html>
